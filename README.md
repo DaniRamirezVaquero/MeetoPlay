@@ -1,5 +1,5 @@
 # MeetoPlay
-![cascos bocadillo blanco 2 colores](https://github.com/DaniRamirezVaquero/Proyecto-1-Trimestre-DWES/assets/145434386/575f5644-3aba-4d12-aaf9-6a59f750e6eb)
+![cascos bocadillo 2 colores](https://github.com/DaniRamirezVaquero/Proyecto-1-Trimestre-DWES/assets/145434386/15657cc7-1230-48c1-9605-dd5d6b468a63)
 
 Aquí se desarrollará el proyecto de MeetoPlay para DWES
 
