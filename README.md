@@ -1,5 +1,5 @@
 # Proyecto-1-Trimestre-DWES 🖥️
-![LogoV1](https://github.com/DaniRamirezVaquero/Proyecto-1-Trimestre-DWES/assets/145434386/b1f71cc5-91b3-42de-b166-ad3ad854bec1)
+![cascos bocadillo 2 colores](https://github.com/DaniRamirezVaquero/Proyecto-1-Trimestre-DWES/assets/145434386/15657cc7-1230-48c1-9605-dd5d6b468a63)
 
 Aquí se desarrollará el proyecto de MeetoPlay en para DWES
 
