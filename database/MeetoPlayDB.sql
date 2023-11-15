@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 11-11-2023 a las 13:16:39
+-- Tiempo de generación: 15-11-2023 a las 08:56:35
 -- Versión del servidor: 8.1.0
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -234,6 +234,7 @@ ALTER TABLE `eventRequirment`
 -- Indices de la tabla `Followed`
 --
 ALTER TABLE `Followed`
+  ADD PRIMARY KEY (`userId`,`followedId`),
   ADD UNIQUE KEY `userId` (`userId`,`followedId`),
   ADD KEY `followedId` (`followedId`);
 
@@ -241,6 +242,7 @@ ALTER TABLE `Followed`
 -- Indices de la tabla `Follower`
 --
 ALTER TABLE `Follower`
+  ADD PRIMARY KEY (`userId`,`followerId`),
   ADD UNIQUE KEY `followerUserId` (`userId`,`followerId`),
   ADD KEY `followerId` (`followerId`);
 
@@ -267,6 +269,7 @@ ALTER TABLE `User`
 -- Indices de la tabla `User_join_Event`
 --
 ALTER TABLE `User_join_Event`
+  ADD PRIMARY KEY (`userId`,`eventId`),
   ADD UNIQUE KEY `userId` (`userId`,`eventId`) USING BTREE,
   ADD KEY `eventId` (`eventId`);
 
