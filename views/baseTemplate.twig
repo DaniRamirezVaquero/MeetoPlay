@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeetoPlay_Main_Events</title>
+    <!-- TODO: Que se pueda linkear el style e imagenes a la plantilla -->
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Kanit', sans-serif;
+        /*overflow: hidden;*/
+    }
+
+    .Background {
+        background: #E9E6FF;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
+    .gradientBg {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        width: 1870px;
+        height: 920px;
+        background: linear-gradient(180deg, #B46DFF 0%, #58FFFF 100%);
+        border-radius: 15px;
+    }
+
+    .MeetoPlay {
+        position: absolute;
+        top: 5px;
+        left: 30px;
+        color: #E9E6FF;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .chatCard--Bg {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        width: 270px;
+        height: 870px;
+        background: #E9E6FF;
+        border-radius: 15px;
+    }
+
+    .pinnedChats--Bg {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 240px;
+        height: 175px;
+        padding: 15px 0 15px 0;
+        background: linear-gradient(180deg, #B46DFF 0%, #9f8eff 100%);
+        border-radius: 15px;
+    }
+
+    .pinnedChats--groupName {
+        position: absolute;
+        top: 17px;
+        left: 50px;
+        color: #262626;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .pinnedChats--dropDownBtn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .pinnedChats--dropDownBtn button {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .pinnedChat1Bg {
+        position: absolute;
+        top: 47px;
+        left: 15px;
+        width: 210px;
+        height: 60px;
+        background: #262626;
+        border-radius: 15px;
+    }
+
+    .pinnedChat1--profPic {
+        position: absolute;
+        top: 12.5px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+
+    .pinnedChat1--profPic img {
+        border-radius: 50%;
+    }
+
+    .pinnedChat1--userName {
+        position: absolute;
+        top: 15px;
+        left: 65px;
+        color: #E9E6FF;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: normal;    
+    }
+
+    .pinnedChat1--userStatusActive {
+        position: absolute;
+        top: 37px;
+        left: 65px;
+        width: 7px;
+        height: 7px;
+        background: #64da6a;
+        border-radius: 50%;
+    }
+
+    .pinnedChat1--userStatusDND {
+        position: absolute;
+        top: 37px;
+        left: 65px;
+        width: 7px;
+        height: 7px;
+        background: #da6464;
+        border-radius: 50%;
+    }
+
+    .pinnedChat1--userStatusAFK {
+        position: absolute;
+        top: 37px;
+        left: 65px;
+        width: 7px;
+        height: 7px;
+        background: #dad264;
+        border-radius: 50%;
+    }
+
+    .pinnedChat1--chatIcon {
+        position: absolute;
+        top: 12.5px;
+        left: 160px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .pinnedChat1--userStatusT {
+        position: absolute;
+        top: 35px;
+        left: 75px;
+        color: #E9E6FF;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .pinnedChat2Bg {
+        position: absolute;
+        top: 125px;
+        left: 15px;
+        width: 210px;
+        height: 60px;
+        background: #262626;
+        border-radius: 15px;
+    }
+
+    .pinnedChat2--profPic {
+        position: absolute;
+        top: 12.5px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+
+    }
+    .pinnedChat2--profPic img {
+        border-radius: 50%;
+    }
+
+    .pinnedChat2--userName {
+        position: absolute;
+        top: 15px;
+        left: 65px;
+        color: #E9E6FF;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: normal;    
+    }
+
+    .pinnedChat2--userStatusActive {
+        position: absolute;
+        top: 37px;
+        left: 65px;
+        width: 7px;
+        height: 7px;
+        background: #64da6a;
+        border-radius: 50%;
+    }
+
+    .pinnedChat2--userStatusDND {
+        position: absolute;
+        top: 37px;
+        left: 65px;
+        width: 7px;
+        height: 7px;
+        background: #da6464;
+        border-radius: 50%;
+    }
+
+    .pinnedChat2--userStatusAFK {
+        position: absolute;
+        top: 37px;
+        left: 65px;
+        width: 7px;
+        height: 7px;
+        background: #dad264;
+        border-radius: 50%;
+    }
+
+    .pinnedChat2--chatIcon {
+        position: absolute;
+        top: 12.5px;
+        left: 160px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .pinnedChat2--userStatusT {
+        position: absolute;
+        top: 35px;
+        left: 75px;
+        color: #E9E6FF;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .chats--Bg {
+        position: absolute;
+        top: 235px;
+        left: 15px;
+        width: 240px;
+        height: 20px;
+        padding: 15px 0 15px 0;
+        background: linear-gradient(180deg, #9997FF 0%, #969EFF 100%);
+        border-radius: 15px;
+    }
+
+    .chats--groupName {
+        position: absolute;
+        top: 17px;
+        left: 50px;
+        color: #262626;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .chats--dropDownBtn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .chats--dropDownBtn button {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .eventsChats--Bg {
+        position: absolute;
+        top: 300px;
+        left: 15px;
+        width: 240px;
+        height: 22px;
+        padding: 15px 0 15px 0;
+        background: linear-gradient(180deg, #9997FF 0%, #959EFF 100%);
+        border-radius: 15px;
+    }
+
+    .eventsChats--groupName {
+        position: absolute;
+        top: 17px;
+        left: 50px;
+        color: #262626;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .eventsChats--dropDownBtn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .eventsChats--dropDownBtn button {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+</style> 
+
+<style>
+    .mainCard--Bg {
+        position: absolute;
+        top: 25px;
+        left: 320px;
+        width: 1085px;
+        height: 870px;
+        background: #E9E6FF;
+        border-radius: 15px;
+    }
+
+    .mainCard--gradientBg {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 1055px;
+        height: 840px;
+        background: linear-gradient(180deg, #B46DFF 0%, #58FFFF 100%);
+        border-radius: 15px;
+    }
+</style>
+
+<style>
+    .activityCard--Bg {
+        position: absolute;
+        top: 25px;
+        left: 1425px;
+        width: 420px;
+        height: 675px;
+        background: #E9E6FF;
+        border-radius: 15px;
+    }
+
+    .bfActivityCard--Bg {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 390px;
+        height: 320px;
+        background: linear-gradient(180deg, #B46DFF 0%, #88B3FF 100%);
+        border-radius: 15px;
+    }
+
+    .bfActivityCard--groupName {
+        position: absolute;
+        top: 17px;
+        left: 50px;
+        color: #262626;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .bfActivityCard--dropDownBtn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .bfActivityCard--dropDownBtn button {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .friendsActivityCard--Bg {
+        position: absolute;
+        top: 350px;
+        left: 15px;
+        width: 390px;
+        height: 230px;
+        background: linear-gradient(180deg, #84B8FF 0%, #70D9FF 100%);
+        border-radius: 15px;
+    }
+
+    .friendsActivityCard--groupName {
+        position: absolute;
+        top: 17px;
+        left: 50px;
+        color: #262626;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .friendsActivityCard--dropDownBtn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .friendsActivityCard--dropDownBtn button {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .followedActivityCard--Bg {
+        position: absolute;
+        top: 595px;
+        left: 15px;
+        width: 390px;
+        height: 50px;
+        background: linear-gradient(180deg, #75D2FF 0%, #71D6FF 100%);
+        border-radius: 15px;
+    }
+
+    .followedActivityCard--groupName {
+        position: absolute;
+        top: 17px;
+        left: 50px;
+        color: #262626;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .followedActivityCard--dropDownBtn {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .followedActivityCard--dropDownBtn button {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+</style>
+
+<style>
+    .profileCard--Bg {
+        position: absolute;
+        top: 720px;
+        left: 1425px;
+        width: 420px;
+        height: 175px;
+        background: #E9E6FF;
+        border-radius: 15px;
+    }
+
+    .userdata {
+        position: absolute;
+        top: 20px;
+        left: 15px;
+    }
+
+    .userdata--userProfPic img{
+        border-radius: 50%;
+    }
+
+    .userdata--userName {
+        position: absolute;
+        top: 15px;
+        left: 65px;
+        color: #262626;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .userdata--userStatusActive {
+        position: absolute;
+        top: 37px;
+        left: 65px;
+        width: 7px;
+        height: 7px;
+        background: #64da6a;
+        border-radius: 50%;
+    }
+
+    .userdata--userStatusDND {
+        position: absolute;
+        top: 37px;
+        left: 65px;
+        width: 7px;
+        height: 7px;
+        background: #da6464;
+        border-radius: 50%;
+    }
+
+    .userdata--userStatusAFK {
+        position: absolute;
+        top: 37px;
+        left: 65px;
+        width: 7px;
+        height: 7px;
+        background: #dad264;
+        border-radius: 50%;
+    }
+
+    .userdata--userStatusT {
+        position: absolute;
+        top: 35px;
+        left: 75px;
+        color: #262626;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .btn--newEvent {
+        position: absolute;
+        top: 95px;
+        left: 15px;
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(180deg, #61F0FF 0%, #5BF9FF 100%);
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn--config {
+        position: absolute;
+        top: 95px;
+        left: 85px;
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(180deg, #61F0FF 0%, #5BF9FF 100%);
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .playingIn {
+        position: absolute;
+        top: 15px;
+        left: 160px;
+        color: #262626;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .playingdata {
+        position: absolute;
+        top: 40px;
+        left: 155px;
+        width: 250px;
+        height: 120px;
+        background-color: #262626;
+        border-radius: 15px;
+    }
+
+    .playingdata--gameLogo {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .playingdata--gameName {
+        position: absolute;
+        top: 17px;
+        left: 70px;
+        color: #E9E6FF;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: normal;
+    
+    }
+
+    .playingdata--gameMode {
+        position: absolute;
+        top: 38px;
+        left: 70px;
+        color: #E9E6FF;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .playingdata--gameTime {
+        position: absolute;
+        top: 70px;
+        left: 15px;
+        color: #E9E6FF;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: normal;
+    
+    }
+
+    .playingdata--gameRank {
+        position: absolute;
+        top: 90px;
+        left: 15px;
+        color: #E9E6FF;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: normal;
+    
+    }
+
+    .playingdata--gameLvl {
+        position: absolute;
+        top: 90px;
+        left: 170px;
+        color: #E9E6FF;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: normal;
+    }
+</style>
+
+{% block styles %}{% endblock %}
+
+<body>
+
+    <!-- En la plantilla base solo incluimos el html que es generico a todas las plantillas que heredan de ella-->
+    
+        <div class="Background">
+            <div class="gradientBg">
+                <div class="MeetoPlay">MeetoPlay</div>
+                {% block chats %}
+                    <div class="chatCard--Bg">
+                        <div class="pinnedChats--Bg">
+                            <div class="pinnedChats--groupHeader">
+                                <div class="pinnedChats--dropDownBtn"><button><img src="https://via.placeholder.com/16x16" alt="dropdownIcon"></button>
+                                </div>
+                                <div class="pinnedChats--groupName">Chats Fijados</div>
+                            </div>
+                            <div class="pinnedChats">
+                                <div class="pinnedChat1">
+                                    <div class="pinnedChat1Bg">
+                                        <div class="pinnedChat1--profPic"><img src="https://via.placeholder.com/35x35" alt="profilePic"></div>
+                                        <div class="pinnedChat1--userName">{{ users[0].userName }}</div>
+                                        <div class="pinnedChat1--userStatus">
+                                            {% if users[0].userStatus == "Active" %}
+                                                <div class="pinnedChat1--userStatusActive"></div>
+                                            {% elseif users[0].userStatus == "DND" %}
+                                                <div class="pinnedChat1--userStatusDND"></div>
+                                            {% else %}
+                                                <div class="pinnedChat1--userStatusAFK"></div>
+                                            {% endif %}
+                                            <div class="pinnedChat1--userStatusT">{{ users[0].userStatus }}</div>
+                                        </div>
+                                        <div class="pinnedChat1--chatIcon"><img src="https://via.placeholder.com/32x32" alt="chatIcon"></div>
+                                    </div>
+                                </div>
+                                <div class="pinnedChat2">
+                                    <div class="pinnedChat2Bg">
+                                        <div class="pinnedChat2--profPic"><img src="https://via.placeholder.com/35x35" alt="profilePic"></div>
+                                        <div class="pinnedChat2--userName">{{ users[1].userName }}</div>
+                                        <div class="pinnedChat2--userStatus">
+                                            {% if users[1].userStatus == "Active" %}
+                                                <div class="pinnedChat2--userStatusActive"></div>
+                                            {% elseif users[1].userStatus == "DND" %}
+                                                <div class="pinnedChat2--userStatusDND"></div>
+                                            {% else %}
+                                                <div class="pinnedChat2--userStatusAFK"></div>
+                                            {% endif %}
+                                            <div class="pinnedChat2--userStatusT">{{ users[1].userStatus }}</div>
+                                        </div>
+                                        <div class="pinnedChat2--chatIcon"><img src="https://via.placeholder.com/32x32" alt="chatIcon"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chats--Bg">
+                            <div class="chats--groupHeader">
+                                <div class="chats--dropDownBtn">
+                                    <button>
+                                        <img src="https://via.placeholder.com/16x16" alt="dropdownIcon">
+                                    </button>
+                                </div>
+                                <div class="chats--groupName">Chats</div>
+                            </div>
+                        </div>
+                        <div class="eventsChats--Bg">
+                            <div class="eventsChats--groupHeader">
+                                <div class="eventsChats--dropDownBtn">
+                                    <button>
+                                        <img src="https://via.placeholder.com/16x16" alt="dropdownIcon">
+                                    </button>
+                                </div>
+                                <div class="eventsChats--groupName">Eventos</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+                {% block main %}
+                <div class="mainCard--Bg">
+                    <div class="mainCard--gradientBg">
+                        {% block mainContent %}{% endblock %}
+                    </div>
+                </div>
+                {% endblock %}
+                {% block activity %}
+                <div class="activityCard--Bg">
+                    <div class="bfActivityCard--Bg">
+                        <div class="bfActivityCard--groupHeader">
+                            <div class="bfActivityCard--dropDownBtn"><button><img src="https://via.placeholder.com/16x16" alt="dropdownIcon"></button>
+                            </div>
+                            <div class="bfActivityCard--groupName">Mejores amigos</div>
+                        </div>
+                    </div>
+                    <div class="friendsActivityCard--Bg">
+                        <div class="friendsActivityCard--groupHeader">
+                            <div class="friendsActivityCard--dropDownBtn"><button><img src="https://via.placeholder.com/16x16" alt="dropdownIcon"></button>
+                            </div>
+                            <div class="friendsActivityCard--groupName">Amigos</div>
+                        </div>
+                    </div>
+                    <div class="followedActivityCard--Bg">
+                        <div class="followedActivityCard--groupHeader">
+                            <div class="followedActivityCard--dropDownBtn"><button><img src="https://via.placeholder.com/16x16" alt="dropdownIcon"></button>
+                            </div>
+                            <div class="followedActivityCard--groupName">Seguidos</div>
+                        </div>
+                    </div>
+                </div>
+                {% endblock %}
+                {% block profile %}
+                <div class="profileCard--Bg">
+                    <div class="userdata">
+                        <div class="userdata--userProfPic">
+                            <img src="https://via.placeholder.com/55x55" alt="userProfilePic">
+                        </div>
+                        <div class="userdata--userName">{{ logedUser.userName }}</div>
+                        <div class="userdata--userStatus">
+                            {% if logedUser.userStatus == "Active" %}
+                                <div class="userdata--userStatusActive"></div>
+                            {% elseif logedUser.userStatus == "DND" %}
+                                <div class="userdata--userStatusDND"></div>
+                            {% else %}
+                                <div class="userdata--userStatusAFK"></div>
+                            {% endif %}
+                            <div class="userdata--userStatusT">{{ logedUser.userStatus }}</div>                  
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <div class="btn--newEvent">
+                            <img src="https://fakeimg.pl/30x30" alt="newEventIcon">
+                        </div>
+                        <div class="btn--config">
+                            <img src="https://fakeimg.pl/30x30" alt="configIcon">
+                        </div>
+                    </div>
+                    <div class="playingIn">Jugando en PC</div>
+                    <div class="playingdata">
+                        <div class="playingdata--gameLogo">
+                            <img src="https://fakeimg.pl/40x40" alt="gameLogo">
+                        </div>
+                        <div class="playingdata--gameName">{{ games[0].gameName }}</div>
+                        <div class="playingdata--gameMode">Ranked 5 vs 5</div>
+                        <div class="playingdata--gameTime">Tiempo en partida: 17:15</div>
+                        <div class="playingdata--gameRank">Rango: {{ userGameStats[0].maxRank }}</div>
+                        <div class="playingdata--gameLvl">Nivel: {{ userGameStats[0].level }}</div>
+                    </div>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+
+
+    
+</body>
+
+</html>

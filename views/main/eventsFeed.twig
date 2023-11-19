@@ -1,0 +1,101 @@
+{% extends "baseTemplate.twig" %}
+
+{% block styles %}
+    <style>
+
+        .scrollFeed {
+            position: relative;
+            top: 15px;
+            left: 15px;
+            width: 1025px;
+            height: 810px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            border-radius: 15px;
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: transparent transparent; /* Firefox */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;            
+        }
+
+        .scrollFeed::-webkit-scrollbar {
+            display: none;
+        }
+
+        .eventCard {
+            position: relative;
+            width: 1025px;
+            height: 370px;
+            background-color: #262626;
+            border-radius: 15px;
+            flex-shrink: 0;
+        }
+
+        .eventCard--dropDownBtn {
+            position: absolute;
+            top: 10.5px;
+            left: 512.5px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .eventCard--dropDownBtn button {
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .eventCard--gameInfo--gameLogo {
+            position: absolute;
+            top: 40px;
+            left: 25px;
+        }
+
+        .eventCard--gameInfo--gameLogo img {
+            width: 75px;
+            height: 75px;
+        }
+
+        .eventCard--gameInfo--gameTitle {
+            position: absolute;
+            top: 45px;
+            left: 125px;
+            font-size: 28px;
+            font-weight: 400;
+            color: #E9E6FF;
+        }
+
+        .eventCard--gameInfo--gameName-gameMode {
+            position: absolute;
+            top: 85px;
+            left: 125px;
+            font-size: 18px;
+            font-weight: 400;
+            color: #E9E6FF;
+        }
+    
+    </style>
+{% endblock %}
+
+{% block mainContent %}
+    <div class="scrollFeed">
+        {% for event in events %}
+            <div class="eventCard">
+                <div class="eventCard--dropDownBtn">
+                    <button><img src="https://via.placeholder.com/16x16" alt="dropdownIcon"></button>
+                </div>
+                <div class="eventCard--gameInfo">
+                    <div class="eventCard--gameInfo--gameLogo">
+                        <img src="{{ (games[event.gameId-1].gameLogo)|raw }}" alt="gameLogo">
+                    </div>
+                    <div class="eventCard--gameInfo--gameTitle"> {{ event.eventTitle }} </div>
+                    <div class="eventCard--gameInfo--gameName-gameMode"> {{ games[event.gameId-1].gameName }} - {{ event.gameMode }}</div>
+                </div>
+
+            </div>
+        {% endfor %}
+</div>
+{% endblock %}
+
