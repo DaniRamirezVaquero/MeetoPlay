@@ -43,7 +43,8 @@
             if (empty($_POST["email"]) || empty($_POST["password"])) {
                 echo "<script>alert('Error: Porfavor, rellene todos los campos e intentelo de nuevo');</script>";
 
-                redireccion("http://localhost/login"); // Redirijo a la página de login
+                //TODO: Corregir problema de redirección
+                redireccion("login"); // Redirijo a la página de login
             }
 
             $user = User::loginUser($_POST["email"], $_POST["password"]);
@@ -53,8 +54,9 @@
                 $_SESSION["loginTime"] = time(); // Guarda el tiempo de inicio de sesión
                 redireccion("main");
             } else {
+                //TODO: Corregir problema de redirección
                 echo "<script>alert('Error: No se ha encontrado el user');</script>";
-                redireccion("http://localhost/login"); // Redirijo a la página de login
+                redireccion("login"); // Redirijo a la página de login 
             }
 
             // // Inicio la sesión

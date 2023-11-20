@@ -1,5 +1,6 @@
 <?php 
 
+    //TODO: Cambiar a PDO
 
     class Connection {
         
