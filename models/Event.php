@@ -1,5 +1,7 @@
 <?php
 
+require_once "library/extra_functs.php";
+
 require_once "library/Connection.php";
 require_once "models/User.php";
 require_once "models/EventRequirement.php";
@@ -87,5 +89,65 @@ class event
         public static function formatHour (string $hour) {
                 $hour = date_create($hour);
                 return date_format($hour, 'H:i');
+        }
+
+        /**
+         * Añade el nombre del usuario en la lista de participantes del evento
+         * @param int $userId
+         * @param int $eventId
+         */
+        public static function addParticipant(int $userId, int $eventId) {
+                        
+                // Establezco conexión con la base de datos
+                $db = Connection::getConnection();
+
+                // Consulta a la base de datos, cogemos todos los eventos que coinciden con el ID pedido
+                $db->query("SELECT participants FROM event WHERE eventId = $eventId;");
+                $participants = $db->getRow("Event")->participants; //Devuelve el evento
+        
+                //Cogemos el nombre del usuario
+                $db->query("SELECT userName FROM user WHERE userId = $userId;");
+                $userName = $db->getRow("User")->userName; //Devuelve el usuario
+
+                //Añadimos el id del usuario a la lista de participantes
+                if ($participants == null) {
+                        $participants = $userName; //Si no hay participantes, añadimos el nombre del usuario
+                } else {
+                        $participants = $userName . "," . $participants; //Si ya hay participantes, añadimos el nombre del usuario con una ","
+                }
+
+
+                //Actualizamos la base de datos
+                $db->query("UPDATE event SET participants = '$participants' WHERE eventId = $eventId;");
+        }
+
+        /**
+         * Elimina el nombre del usuario de la lista de participantes del evento
+         * @param int $userId
+         * @param int $eventId
+         */
+        public static function removeParticipant(int $userId, int $eventId) {
+                        
+                // Establezco conexión con la base de datos
+                $db = Connection::getConnection();
+
+                // Consulta a la base de datos, cogemos todos los eventos que coinciden con el ID pedido
+                $db->query("SELECT participants FROM event WHERE eventId = $eventId;");
+                $participants = $db->getRow("Event")->participants; //Devuelve el evento
+        
+                //Cogemos el nombre del usuario
+                $db->query("SELECT userName FROM user WHERE userId = $userId;");
+                $userName = $db->getRow("User")->userName; //Devuelve el usuario
+
+                // Eliminamos el id del usuario de la lista de participantes
+                if ($participants == $userName) { //Si solo hay un participante y es el usuario
+                        $participants = null;
+                } else {
+                        $participants = str_replace($userName.",", "", $participants); //Si hay más de un participante, eliminamos el nombre del usuario de la lista
+                }
+
+
+                //Actualizamos la base de datos
+                $db->query("UPDATE event SET participants = '$participants' WHERE eventId = $eventId;");
         }
 }

@@ -5,7 +5,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Kanit', sans-serif;
-    /*overflow: hidden;*/
+    /* overflow: hidden; */
 }
 
 .Background {
@@ -487,17 +487,19 @@ body {
 .userdata--userName {
     position: absolute;
     top: 10px;
-    left: 65px;
+    left: 60px;
     color: #262626;
     font-size: 16px;
     font-weight: 600;
     line-height: normal;
+    width: 75px;
+    overflow: hidden;
 }
 
 .userdata--userStatusActive {
     position: absolute;
     top: 35px;
-    left: 65px;
+    left: 60px;
     width: 7px;
     height: 7px;
     background: #64da6a;
@@ -507,7 +509,7 @@ body {
 .userdata--userStatusDND {
     position: absolute;
     top: 35px;
-    left: 65px;
+    left: 60px;
     width: 7px;
     height: 7px;
     background: #da6464;
@@ -517,7 +519,7 @@ body {
 .userdata--userStatusAFK {
     position: absolute;
     top: 35px;
-    left: 65px;
+    left: 60px;
     width: 7px;
     height: 7px;
     background: #dad264;

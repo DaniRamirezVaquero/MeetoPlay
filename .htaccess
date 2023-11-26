@@ -2,6 +2,9 @@ RewriteEngine on
 
 
 RewriteRule ^login$ index.php?m=user&f=showLogin [L]
-
+RewriteRule ^register$ index.php?m=user&f=showRegister [L]
 RewriteRule ^main$ index.php?m=main&f=showMainPage [L]
+RewriteRule ^joinEvent/([1-9][0-9]*)$ index.php?m=user&f=joinEvent&eventId=$1 [L]
+RewriteRule ^unjoinEvent/([1-9][0-9]*)$ index.php?m=user&f=unjoinEvent&eventId=$1 [L]
+
 

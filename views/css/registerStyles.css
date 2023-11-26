@@ -6,7 +6,7 @@ body {
     padding: 0;
 }
 
-.SingIn {
+.SignUp {
     width: 1920px;
     height: 1080px;
     position: relative;
@@ -19,7 +19,7 @@ body {
 .PassInput,
 .EmailInput,
 .SigninBtn,
-.SinginWGoogleBtn {
+.SignUpWGoogleBtn {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -29,7 +29,7 @@ body {
     background: #E9E6FF;
 }
 
-.SinginCard {
+.SignUpCard {
     width: 760px;
     height: 920px;
     left: 25px;
@@ -42,11 +42,11 @@ body {
     border-radius: 15px;
 }
 
-.LoginForm {
+.RegisterForm {
     width: 455px;
     height: 577px;
-    left: 154px;
-    top: 190px;
+    left: 155px;
+    top: 110px;
     position: absolute;
 }
 
@@ -91,7 +91,7 @@ body {
     width: 450px;
     height: 78px;
     left: 0px;
-    top: 298px;
+    top: 390px;
     position: absolute;
 }
 
@@ -106,13 +106,13 @@ body {
 }
 
 .PassInput {
-    width: 440px; 
-    height: 42px; 
-    left: 0px; 
-    top: 36px; 
-    position: absolute; 
-    background: white; 
-    border-radius: 5px; 
+    width: 440px;
+    height: 42px;
+    left: 0px;
+    top: 36px;
+    position: absolute;
+    background: white;
+    border-radius: 5px;
     border: 1px rgba(0, 0, 0, 0.46) solid;
     padding-left: 10px;
     font-family: 'Raleway', 'sans-serif';
@@ -120,22 +120,96 @@ body {
     font-size: 18px;
 }
 
+.userName {
+    width: 450px;
+    height: 78px;
+    left: 0px;
+    top: 285px;
+    position: absolute;
+}
+
+.UserNameInput {
+    width: 440px;
+    height: 42px;
+    left: 0px;
+    top: 36px;
+    position: absolute;
+    background: white;
+    border-radius: 5px;
+    border: 1px rgba(0, 0, 0, 0.46) solid;
+    padding-left: 10px;
+    font-family: 'Raleway', 'sans-serif';
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.NombreUsuario {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.bornDate {
+    width: 450px;
+    height: 78px;
+    left: 0px;
+    top: 495px;
+    position: absolute;
+}
+
+.BornDateInput {
+    width: 430px;
+    height: 42px;
+    left: 0px;
+    top: 36px;
+    position: absolute;
+    background: white;
+    border-radius: 5px;
+    border: 1px rgba(0, 0, 0, 0.46) solid;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Raleway', 'sans-serif';
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.BornDateInput::placeholder{
+    color: #BDBDBD;
+    font-family: 'Raleway', 'sans-serif';
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.FechaNacimiento {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
 .Email {
     width: 450px;
     height: 78px;
-    left: 1px;
-    top: 186px;
+    left: 0px;
+    top: 180px;
     position: absolute;
 }
 
 .EmailInput {
-    width: 440px; 
-    height: 42px; 
-    left: 0px; 
-    top: 36px; 
-    position: absolute; 
-    background: white; 
-    border-radius: 5px; 
+    width: 440px;
+    height: 42px;
+    left: 0px;
+    top: 36px;
+    position: absolute;
+    background: white;
+    border-radius: 5px;
     border: 1px rgba(0, 0, 0, 0.46) solid;
     padding-left: 10px;
     font-family: 'Raleway', 'sans-serif';
@@ -156,8 +230,8 @@ body {
 .SigninBtnC {
     width: 450px;
     height: 42px;
-    left: 1px;
-    top: 440px;
+    left: 0px;
+    top: 615px;
     position: absolute;
 }
 
@@ -227,8 +301,8 @@ body {
 }
 
 .CrearUnaCuenta {
-    left: 247px;
-    top: 547px;
+    left: 245px;
+    top: 675px;
     position: absolute;
     color: black;
     font-size: 20px;
@@ -243,8 +317,8 @@ body {
 }
 
 .NoTienesCuenta {
-    left: 71px;
-    top: 547px;
+    left: 70px;
+    top: 675px;
     position: absolute;
     color: black;
     font-size: 20px;
@@ -260,7 +334,7 @@ body {
     position: absolute;
 }
 
-.Logo{
+.Logo {
     width: 70px;
     height: 70px;
     left: 0px;
@@ -286,7 +360,7 @@ body {
     position: absolute;
 }
 
-.RightComposition img{
+.RightComposition img {
     width: 1000px;
     height: auto;
 

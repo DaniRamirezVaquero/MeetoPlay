@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="views/css/loginStyles.css">
+    <link rel="stylesheet" href="views/css/registerStyles.css">
     <link href="favicon.ico" rel="icon" type="image/x-icon">
 </head>
     <body>
-        <div class="SingIn">
+        <div class="SignUp">
             <div class="Background"></div>
-            <div class="SinginCard">
+            <div class="SignUpCard">
                 <div class="BackgroundCard"></div>
                 <div class="CardTittle">
                     <img class="Logo" src="views/img/LogoV1.png" />
@@ -21,14 +21,14 @@
 
                     <input type="hidden" name="_csrf" value="{{ token }}"/>
                     <input type="hidden" name="m" value="user"/>
-                    <input type="hidden" name="f" value="login"/>
+                    <input type="hidden" name="f" value="register"/>
 
-                    <div class="LoginForm">
-                        <div class="SignInS">Sign In</div>
+                    <div class="RegisterForm">
+                        <div class="SignInS">Sign Up</div>
                         <div class="SigninGoogleBtn">
-                            <div class="SinginWGoogleBtn"></div>
+                            <div class="SignUpWGoogleBtn"></div>
                             <img class="GIcon" src="views/img/googleIcon.png" />
-                            <div class="SignInWithGoogle">Sign in with Google</div>
+                            <div class="SignInWithGoogle">Sign up with Google</div>
                         </div>
                         <div class="Hr">
                             <div class="Or">OR</div>
@@ -37,17 +37,24 @@
                         </div>
                         <div class="Email">
                             <div class="CorreoElectronico">Correo Electrónico</div>
-                            <input type="email" class="EmailInput" name="email" value="dani.vakero.1@gmail.com">
+                            <input type="email" class="EmailInput" name="email" value="nuevo@registro.com">
+                        </div>
+                        <div class="userName">
+                            <div class="NombreUsuario">Nombre de usuario: </div>
+                            <input type="text" class="UserNameInput" name="userName" value="nuevoRegistro">
                         </div>
                         <div class="Pass">
                             <div class="Contrasenya">Contraseña</div>
                             <input type="password" class="PassInput" name="password" value="1234">
                         </div>
-                        <div class="SigninBtnC">
-                            <button class="SigninBtn">Sign In</button>
+                        <div class="bornDate">
+                            <div class="FechaNacimiento">Fecha de nacimiento: </div>
+                            <input type="date" class="BornDateInput" name="bornDate">
                         </div>
-                        <div class="NoTienesCuenta">¿No tienes cuenta? </div><div class="CrearUnaCuenta"><a href="register">Crear una cuenta</a></div>
-                        
+                        <div class="SigninBtnC">
+                            <button class="SigninBtn">Sign Up</button>
+                        </div>
+                        <div class="NoTienesCuenta">¿Ya tienes cuenta?</div><div class="CrearUnaCuenta"><a href="/MeetoPlay/login">Iniciar sesion</a></div>
                     </div>
                 </form>
             </div>

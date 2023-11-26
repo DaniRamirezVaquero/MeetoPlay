@@ -9,5 +9,18 @@ require_once "library/extra_functs.php";
 
     class EventController extends Controller {
 
+        /**
+         * Esta función guarda en la sessión los participantes de un evento
+         * @param Event $event
+         */
+        public static function loadEventParticipant(Event $event) {
+            
+            if ($event->participants != null) {
 
+                $participants = $event->participants;
+                $participantsArray = explode(",", $participants);
+
+                array_push($_SESSION["eventParticipants"], $participantsArray);
+            }
+        } 
     }

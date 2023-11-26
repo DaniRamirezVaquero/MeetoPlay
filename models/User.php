@@ -113,4 +113,45 @@ class User
                 //Devolvemos los usuarios
                 return $users;                
         }
+
+        public static function emailExists(string $email): bool
+        {
+
+                // Establezco conexión con la base de datos
+                $db = Connection::getConnection();
+
+                // Consulta a la base de datos, cogemos la user que coincide con el email pedido
+                $db->query("SELECT * FROM user WHERE email = '$email';");
+                $user = $db->getRow("User"); //Devuelve un objeto user
+
+                //Devolvemos la user
+                return $user != null;
+        }
+
+        public static function userNameExists(string $userName): bool
+        {
+
+                // Establezco conexión con la base de datos
+                $db = Connection::getConnection();
+
+                // Consulta a la base de datos, cogemos la user que coincide con el email pedido
+                $db->query("SELECT * FROM user WHERE userName = '$userName';");
+                $user = $db->getRow("User"); //Devuelve un objeto user
+
+                //Devolvemos la user
+                return $user != null;
+        }
+
+        /**
+         * Guarda un user en la base de datos
+         * @return
+         */
+        public function save() {
+                        
+                // Establezco conexión con la base de datos
+                $db = Connection::getConnection();
+
+                // Consulta a la base de datos, insertamos el user
+                $db->query("INSERT INTO user (userName, userStatus, profilePic, email, password, bornDate) VALUES ('$this->userName', '$this->userStatus', '$this->profilePic', '$this->email', '$this->password', '$this->bornDate');");
+        }
 }

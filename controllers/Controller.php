@@ -1,6 +1,7 @@
 <?php
 
 require_once "vendor/autoload.php";
+require_once "library/TwigFunctions.php";
 
 abstract class Controller {
 
@@ -15,6 +16,9 @@ abstract class Controller {
         // Cargamos el directorio de plantillas
         $loader = new \Twig\Loader\FilesystemLoader("views");
         $this->twig = new \Twig\Environment($loader);
+
+        //Añado funciones personalizadas a Twig
+        $this->twig->addFunction(new \Twig\TwigFunction('UserJoinedEvent', 'UserJoinedEvent'));
 
     }
 

@@ -17,73 +17,75 @@
         <div class="Background">
             <div class="gradientBg">
                 <div class="MeetoPlay">MeetoPlay</div>
-                {% block chats %}
-                    <div class="chatCard--Bg">
-                        <div class="pinnedChats--Bg">
-                            <div class="pinnedChats--groupHeader">
-                                <div class="pinnedChats--dropDownBtn"><button><img class="dropDownArrow" src="./views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
-                                </div>
-                                <div class="pinnedChats--groupName">Chats Fijados</div>
-                            </div>
-                            <div class="pinnedChats">
-                                <div class="pinnedChat1">
-                                    <div class="pinnedChat1Bg">
-                                        <div class="pinnedChat1--profPic"><img src="{{ followedUsers[0].profilePic|raw }}" alt="profilePic"></div>
-                                        <div class="pinnedChat1--userName">{{ followedUsers[0].userName }}</div>
-                                        <div class="pinnedChat1--userStatus">
-                                            {% if followedUsers[0].userStatus == "Active" %}
-                                                <div class="pinnedChat1--userStatusActive"></div>
-                                            {% elseif followedUsers[0].userStatus == "DND" %}
-                                                <div class="pinnedChat1--userStatusDND"></div>
-                                            {% else %}
-                                                <div class="pinnedChat1--userStatusAFK"></div>
-                                            {% endif %}
-                                            <div class="pinnedChat1--userStatusT">{{ followedUsers[0].userStatus }}</div>
-                                        </div>
-                                        <div class="pinnedChat1--chatIcon"><img src="./views/img/chatIconBPW.png" alt="chatIcon"></div>
+                    {% block chats %}
+                        <div class="chatCard--Bg">
+                            <div class="pinnedChats--Bg">
+                                <div class="pinnedChats--groupHeader">
+                                    <div class="pinnedChats--dropDownBtn"><button><img class="dropDownArrow" src="./views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
                                     </div>
+                                    <div class="pinnedChats--groupName">Chats Fijados</div>
                                 </div>
-                                <div class="pinnedChat2">
-                                    <div class="pinnedChat2Bg">
-                                        <div class="pinnedChat2--profPic"><img src="{{ followedUsers[1].profilePic|raw }}" alt="profilePic"></div>
-                                        <div class="pinnedChat2--userName">{{ followedUsers[1].userName }}</div>
-                                        <div class="pinnedChat2--userStatus">
-                                            {% if followedUsers[1].userStatus == "Active" %}
-                                                <div class="pinnedChat2--userStatusActive"></div>
-                                            {% elseif followedUsers[1].userStatus == "DND" %}
-                                                <div class="pinnedChat2--userStatusDND"></div>
-                                            {% else %}
-                                                <div class="pinnedChat2--userStatusAFK"></div>
-                                            {% endif %}
-                                            <div class="pinnedChat2--userStatusT">{{ followedUsers[1].userStatus }}</div>
+                                <div class="pinnedChats">
+                                    {% if followedUsers != null %}
+                                        <div class="pinnedChat1">
+                                            <div class="pinnedChat1Bg">
+                                                <div class="pinnedChat1--profPic"><img src="{{ followedUsers[0].profilePic|raw }}" alt="profilePic"></div>
+                                                <div class="pinnedChat1--userName">{{ followedUsers[0].userName }}</div>
+                                                <div class="pinnedChat1--userStatus">
+                                                    {% if followedUsers[0].userStatus == "Active" %}
+                                                        <div class="pinnedChat1--userStatusActive"></div>
+                                                    {% elseif followedUsers[0].userStatus == "DND" %}
+                                                        <div class="pinnedChat1--userStatusDND"></div>
+                                                    {% else %}
+                                                        <div class="pinnedChat1--userStatusAFK"></div>
+                                                    {% endif %}
+                                                    <div class="pinnedChat1--userStatusT">{{ followedUsers[0].userStatus }}</div>
+                                                </div>
+                                                <div class="pinnedChat1--chatIcon"><img src="./views/img/chatIconBPW.png" alt="chatIcon"></div>
+                                            </div>
                                         </div>
-                                        <div class="pinnedChat2--chatIcon"><img src="./views/img/chatIconBPW.png" alt="chatIcon"></div>
+                                        <div class="pinnedChat2">
+                                            <div class="pinnedChat2Bg">
+                                                <div class="pinnedChat2--profPic"><img src="{{ followedUsers[1].profilePic|raw }}" alt="profilePic"></div>
+                                                <div class="pinnedChat2--userName">{{ followedUsers[1].userName }}</div>
+                                                <div class="pinnedChat2--userStatus">
+                                                    {% if followedUsers[1].userStatus == "Active" %}
+                                                        <div class="pinnedChat2--userStatusActive"></div>
+                                                    {% elseif followedUsers[1].userStatus == "DND" %}
+                                                        <div class="pinnedChat2--userStatusDND"></div>
+                                                    {% else %}
+                                                        <div class="pinnedChat2--userStatusAFK"></div>
+                                                    {% endif %}
+                                                    <div class="pinnedChat2--userStatusT">{{ followedUsers[1].userStatus }}</div>
+                                                </div>
+                                                <div class="pinnedChat2--chatIcon"><img src="./views/img/chatIconBPW.png" alt="chatIcon"></div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="chats--Bg">
+                                <div class="chats--groupHeader">
+                                    <div class="chats--dropDownBtn">
+                                        <button>
+                                            <img class="dropDownArrow" src="./views/img/dropDownArrowW.png" alt="dropdownIcon">
+                                        </button>
                                     </div>
+                                    <div class="chats--groupName">Chats</div>
+                                </div>
+                            </div>
+                            <div class="eventsChats--Bg">
+                                <div class="eventsChats--groupHeader">
+                                    <div class="eventsChats--dropDownBtn">
+                                        <button>
+                                            <img class="dropDownArrow" src="./views/img/dropDownArrowW.png" alt="dropdownIcon">
+                                        </button>
+                                    </div>
+                                    <div class="eventsChats--groupName">Eventos</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="chats--Bg">
-                            <div class="chats--groupHeader">
-                                <div class="chats--dropDownBtn">
-                                    <button>
-                                        <img class="dropDownArrow" src="./views/img/dropDownArrowW.png" alt="dropdownIcon">
-                                    </button>
-                                </div>
-                                <div class="chats--groupName">Chats</div>
-                            </div>
-                        </div>
-                        <div class="eventsChats--Bg">
-                            <div class="eventsChats--groupHeader">
-                                <div class="eventsChats--dropDownBtn">
-                                    <button>
-                                        <img class="dropDownArrow" src="./views/img/dropDownArrowW.png" alt="dropdownIcon">
-                                    </button>
-                                </div>
-                                <div class="eventsChats--groupName">Eventos</div>
-                            </div>
-                        </div>
-                    </div>
-                {% endblock %}
+                    {% endblock %}
                 {% block main %}
                 <div class="mainCard--Bg">
                     <div class="mainCard--gradientBg">
