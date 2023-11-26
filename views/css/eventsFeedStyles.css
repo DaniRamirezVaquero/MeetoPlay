@@ -1,0 +1,169 @@
+.scrollFeed {
+    position: relative;
+    top: 15px;
+    left: 15px;
+    width: 1025px;
+    height: 810px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 15px;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: transparent transparent; /* Firefox */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;            
+}
+
+.scrollFeed::-webkit-scrollbar {
+    display: none;
+}
+
+.dropDownArrow {
+    width: 16px;
+    height: 16px;
+}
+
+.eventCard {
+    position: relative;
+    width: 1025px;
+    height: 370px;
+    background-color: #262626;
+    border-radius: 15px;
+    flex-shrink: 0;
+    color: whitesmoke;
+}
+
+.eventCard--dropDownBtn {
+    position: absolute;
+    top: 10.5px;
+    left: 512.5px;
+    width: 20px;
+    height: 20px;
+}
+
+.eventCard--dropDownBtn button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.eventCard--gameInfo {
+    position: absolute;
+    top: 40px;
+    left: 15px;
+    width: 500px;
+    height: 75px;
+}
+
+.eventCard--gameInfo--gameLogo {
+    position: absolute;
+    top: 0px;
+    left: 25px;
+}
+
+.eventCard--gameInfo--gameLogo img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.eventCard--gameInfo--gameTitle {
+    position: absolute;
+    top: -10px;
+    left: 125px;
+    font-size: 28px;
+    font-weight: 400;
+    
+}
+
+.eventCard--gameInfo--gameName-gameMode {
+    position: absolute;
+    top: 25px;
+    left: 125px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.eventCard--gameInfo--platform {
+    position: absolute;
+    top: 50px;
+    left: 125px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.eventCard--dateInfo {
+    position: absolute;
+    width: 300px;
+    height: 50px;
+    top: 140px;
+    left: 40px;
+    font-weight: 300;
+}
+
+.eventCard--dateInfo--dateB {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 18px;
+}
+
+.eventCard--dateInfo--timeB {
+    position: absolute;
+    top: 0px;
+    left: 178px;
+    font-size: 18px;
+}
+
+.eventCard--dateInfo--datetimeEnd {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    font-size: 18px;
+}
+
+.eventCard--requirements {
+    position: absolute;
+    width: 300px;
+    height: 125px;
+    top: 210px;
+    left: 40px;
+    font-weight: 300;
+}
+
+.eventCard--requirements--title {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+
+.eventCard--requirements .bold{
+    font-weight: 500;
+}
+
+.eventCard--owner {
+    position: absolute;
+    width: 300px;
+    height: 70px;
+    top: 45px;
+    left: 685px;
+    font-weight: 300;
+}
+.eventCard--owner--proPic img{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit:cover;
+}
+
+.eventCard--owner--userName {
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    width: 250px;
+    font-size: 18px;
+}

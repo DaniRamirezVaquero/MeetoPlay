@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.SingIn {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    background: white;
+    font-family: 'Kanit', sans-serif;
+}
+
+.Background,
+.BackgroundCard,
+.PassInput,
+.EmailInput,
+.SigninBtn,
+.SinginWGoogleBtn {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.Background {
+    background: #E9E6FF;
+}
+
+.SinginCard {
+    width: 760px;
+    height: 920px;
+    left: 25px;
+    top: 25px;
+    position: absolute;
+}
+
+.BackgroundCard {
+    background: linear-gradient(180deg, #B46DFF 0%, #58FFFF 100%);
+    border-radius: 15px;
+}
+
+.LoginForm {
+    width: 455px;
+    height: 577px;
+    left: 154px;
+    top: 190px;
+    position: absolute;
+}
+
+.Hr {
+    width: 450px;
+    height: 30px;
+    left: 0px;
+    top: 138px;
+    position: absolute;
+}
+
+.Or {
+    left: 215px;
+    top: 8px;
+    position: absolute;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.Hr2,
+.Hr1 {
+    width: 186px;
+    height: 0px;
+    position: absolute;
+    border: 3px black solid;
+    border-radius: 5px;
+}
+
+.Hr2 {
+    left: 264px;
+    top: 15px;
+}
+
+.Hr1 {
+    left: 0px;
+    top: 15px;
+}
+
+.Pass {
+    width: 450px;
+    height: 78px;
+    left: 0px;
+    top: 298px;
+    position: absolute;
+}
+
+.Contrasenya {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.PassInput {
+    width: 440px; 
+    height: 42px; 
+    left: 0px; 
+    top: 36px; 
+    position: absolute; 
+    background: white; 
+    border-radius: 5px; 
+    border: 1px rgba(0, 0, 0, 0.46) solid;
+    padding-left: 10px;
+    font-family: 'Raleway', 'sans-serif';
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.Email {
+    width: 450px;
+    height: 78px;
+    left: 1px;
+    top: 186px;
+    position: absolute;
+}
+
+.EmailInput {
+    width: 440px; 
+    height: 42px; 
+    left: 0px; 
+    top: 36px; 
+    position: absolute; 
+    background: white; 
+    border-radius: 5px; 
+    border: 1px rgba(0, 0, 0, 0.46) solid;
+    padding-left: 10px;
+    font-family: 'Raleway', 'sans-serif';
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.CorreoElectronico {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.SigninBtnC {
+    width: 450px;
+    height: 42px;
+    left: 1px;
+    top: 440px;
+    position: absolute;
+}
+
+.SigninBtn {
+    width: 100%;
+    height: 100%;
+    background: #8F6CFF;
+    border: 1px rgba(0, 0, 0, 0.46) solid;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    cursor: pointer;
+    color: whitesmoke;
+    font-family: 'Kanit', 'sans-serif';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.SignIn {
+    left: 195px;
+    top: 230px;
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.SigninGoogleBtn {
+    width: 455px;
+    height: 59px;
+    left: 0px;
+    top: 61px;
+    position: absolute;
+    background: white;
+    border-radius: 20px;
+    border: 1px rgba(0, 0, 0, 0.46) solid;
+}
+
+.GIcon {
+    width: 38px;
+    height: 38px;
+    left: 13px;
+    top: 10px;
+    position: absolute;
+}
+
+.SignInWithGoogle {
+    left: 135px;
+    top: 15px;
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.SignInS {
+    width: 100px;
+    height: 43px;
+    left: 175px;
+    top: 0px;
+    position: absolute;
+    color: white;
+    font-size: 28px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.CrearUnaCuenta {
+    left: 247px;
+    top: 547px;
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: underline;
+    word-wrap: break-word;
+}
+
+.NoTienesCuenta {
+    left: 71px;
+    top: 547px;
+    position: absolute;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.CardTittle {
+    width: 249px;
+    height: 65px;
+    left: 32px;
+    top: 24px;
+    position: absolute;
+}
+
+.Logo{
+    width: 70px;
+    height: 70px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+}
+
+.Meetoplay {
+    left: 90px;
+    top: 17px;
+    position: absolute;
+    color: white;
+    font-size: 32px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.RightComposition {
+    width: 985px;
+    height: 920px;
+    left: 795px;
+    top: 0px;
+    position: absolute;
+}
+
+.RightComposition img{
+    width: 1000px;
+    height: auto;
+
+}

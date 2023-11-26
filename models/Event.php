@@ -1,16 +1,18 @@
 <?php
 
-    require_once "library/Connection.php";
-    require_once "models/User.php";
-    require_once "models/EventRequirement.php";
+require_once "library/Connection.php";
+require_once "models/User.php";
+require_once "models/EventRequirement.php";
 
 
-    class event{
+class event
+{
 
         public int $eventId;
         public string $eventTitle;
         public int $gameId;
         public string $gameMode;
+        public string $platform;
         public int $eventOwnerId;
         public string $dateBegin;
         public string $dateEnd;
@@ -31,15 +33,16 @@
          * @param int $userId
          * @return array
          */
-        public static function getAllEventsByUserId(int $userId): array {
-                
+        public static function getAllEventsByUserId(int $userId): array
+        {
+
                 // Establezco conexión con la base de datos
                 $db = Connection::getConnection();
-    
+
                 // Consulta a la base de datos, cogemos todos los eventos que coinciden con el ID pedido
-                $db->query("SELECT * FROM event WHERE eventOwnerId = $userId;");    
+                $db->query("SELECT * FROM event WHERE eventOwnerId = $userId;");
                 $events = $db->getAll("Event"); //Devuelve un objeto event
-    
+
                 //Devolvemos los eventos
                 return $events;
         }
@@ -49,28 +52,40 @@
          * @param int $userId
          * @return array
          */
-        public static function getAllEventsByFollowedUsers(int $userId): array {
-                
+        public static function getAllEventsByFollowedUsers(int $userId): array
+        {
+
                 // Establezco conexión con la base de datos
                 $db = Connection::getConnection();
-    
+
                 // Consulta a la base de datos, cogemos todos los eventos que coinciden con el ID pedido
-                $db->query("SELECT * FROM event WHERE eventOwnerId IN (SELECT followedId FROM follower_followed WHERE followerId = " . $userId . ");");    
+                $db->query("SELECT * FROM event WHERE eventOwnerId IN (SELECT followedId FROM follower_followed WHERE followerId = " . $userId . ");");
                 $events = $db->getAll("Event"); //Devuelve un objeto event
-    
+
                 //Devolvemos los eventos
                 return $events;
         }
 
-        public static function getAllEvents(): array {
-                
+        public static function getAllEvents(): array
+        {
+
                 // Establezco conexión con la base de datos
                 $db = Connection::getConnection();
-    
+
                 // Consulta a la base de datos, cogemos todos los eventos
-                $db->query("SELECT * FROM event;");    
-    
+                $db->query("SELECT * FROM event;");
+
                 //Devolvemos los eventos
                 return $db->getAll("event");
         }
-    }
+
+        public static function formatDate (string $date)  {
+                $date = date_create($date);
+                return date_format($date, 'd/m/Y');
+        }
+
+        public static function formatHour (string $hour) {
+                $hour = date_create($hour);
+                return date_format($hour, 'H:i');
+        }
+}

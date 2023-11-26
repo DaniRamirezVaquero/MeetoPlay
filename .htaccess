@@ -1,6 +1,7 @@
 RewriteEngine on
 
+
 RewriteRule ^login$ index.php?m=user&f=showLogin [L]
 
-RewriteRule ^main$ index.php?m=event&f=showAllEvents [L]
+RewriteRule ^main$ index.php?m=main&f=showMainPage [L]
 

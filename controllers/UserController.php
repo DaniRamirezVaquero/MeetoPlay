@@ -41,10 +41,9 @@
 
             // Compruebo si el formulario viene vacio
             if (empty($_POST["email"]) || empty($_POST["password"])) {
-                echo "<script>alert('Error: Porfavor, rellene todos los campos e intentelo de nuevo');</script>";
-
-                //TODO: Corregir problema de redirección
-                redireccion("login"); // Redirijo a la página de login
+                //TODO: Corregir problema de redirección (Solución: redirigir a la página de login con un mensaje de error)
+                redireccion("login?err"); // Redirijo a la página de login
+                // echo "<script>alert('Error: Porfavor, rellene todos los campos e intentelo de nuevo');</script>";
             }
 
             $user = User::loginUser($_POST["email"], $_POST["password"]);

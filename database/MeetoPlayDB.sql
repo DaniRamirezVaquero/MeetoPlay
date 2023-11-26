@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 19-11-2023 a las 21:11:36
--- Versión del servidor: 8.1.0
+-- Tiempo de generación: 23-11-2023 a las 19:06:18
+-- Versión del servidor: 8.2.0
 -- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -32,13 +32,14 @@ CREATE TABLE `event` (
   `eventTitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `gameId` int NOT NULL,
   `gameMode` varchar(255) NOT NULL,
+  `platform` varchar(20) NOT NULL,
   `eventOwnerId` int NOT NULL,
   `dateBegin` date NOT NULL,
   `dateEnd` date NOT NULL,
   `hourBegin` time NOT NULL,
   `hourEnd` time NOT NULL,
   `eventRequirementId` int DEFAULT NULL,
-  `participants` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `participants` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `slots` int NOT NULL,
   `dateInscriptionEnd` date NOT NULL,
   `hourInscriptionEnd` time NOT NULL
@@ -48,18 +49,18 @@ CREATE TABLE `event` (
 -- Volcado de datos para la tabla `event`
 --
 
-INSERT INTO `event` (`eventId`, `eventTitle`, `gameId`, `gameMode`, `eventOwnerId`, `dateBegin`, `dateEnd`, `hourBegin`, `hourEnd`, `eventRequirementId`, `participants`, `slots`, `dateInscriptionEnd`, `hourInscriptionEnd`) VALUES
-(1, 'Tardecita de Lol', 1, 'Aram', 11, '2023-12-17', '2023-12-17', '17:00:00', '23:00:00', 1, 'Natty, Chriss, y 1 usuario desconociado más..', 5, '2023-12-17', '15:00:00'),
-(2, 'Minecraft Server', 4, 'Moded', 11, '2023-12-11', '2023-12-18', '19:30:00', '24:00:00', 2, '!TT7, SerialBan, Natty, Chriss y 11 usuarios desconocidos más...', 15, '2023-12-11', '19:00:00'),
-(9, 'prueba', 1, 'prueba', 13, '2023-11-01', '2023-11-01', '43:19:24', '50:19:24', NULL, 'Pruba y prueba', 1, '2023-11-08', '33:19:24');
+INSERT INTO `event` (`eventId`, `eventTitle`, `gameId`, `gameMode`, `platform`, `eventOwnerId`, `dateBegin`, `dateEnd`, `hourBegin`, `hourEnd`, `eventRequirementId`, `participants`, `slots`, `dateInscriptionEnd`, `hourInscriptionEnd`) VALUES
+(1, 'Tardecita de Lol', 1, 'Aram', 'PC', 11, '2023-12-17', '2023-12-17', '17:00:00', '23:00:00', 1, 'Natty, Chriss, y 1 usuario desconociado más..', 5, '2023-12-17', '15:00:00'),
+(2, 'Minecraft Server', 4, 'Moded', 'PC / XBox', 11, '2023-12-11', '2023-12-18', '19:30:00', '24:00:00', NULL, '!TT7, SerialBan, Natty, Chriss y 11 usuarios desconocidos más...', 15, '2023-12-11', '19:00:00'),
+(9, 'Duo Valorant', 2, 'Ranked', 'PC', 13, '2023-12-01', '2023-12-01', '17:00:00', '19:30:00', 2, NULL, 1, '2023-12-01', '19:30:00');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `eventRequirment`
+-- Estructura de tabla para la tabla `eventRequirement`
 --
 
-CREATE TABLE `eventRequirment` (
+CREATE TABLE `eventRequirement` (
   `eventRequirementId` int NOT NULL,
   `maxRank` varchar(50) DEFAULT NULL,
   `minRank` varchar(50) DEFAULT NULL,
@@ -68,12 +69,12 @@ CREATE TABLE `eventRequirment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `eventRequirment`
+-- Volcado de datos para la tabla `eventRequirement`
 --
 
-INSERT INTO `eventRequirment` (`eventRequirementId`, `maxRank`, `minRank`, `maxLvl`, `minLvl`) VALUES
+INSERT INTO `eventRequirement` (`eventRequirementId`, `maxRank`, `minRank`, `maxLvl`, `minLvl`) VALUES
 (1, 'Oro II', 'Madera IV', 500, 30),
-(2, NULL, NULL, NULL, NULL);
+(2, 'Platino III', 'Oro I', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,9 +174,9 @@ INSERT INTO `user` (`userId`, `userName`, `userStatus`, `profilePic`, `email`, `
 (8, 'hsarton7', 'Active', NULL, 'sblodg7@thetimes.co.uk', 'dcd814f8ddbc5a2ab01f95e463d5b60c', '2003-11-25'),
 (9, 'tfarlow8', 'Active', NULL, 'emarquis8@theatlantic.com', '033e24529c5f76c29a873e5ed4c5d970', '2001-03-19'),
 (10, 'egorioli9', 'Active', NULL, 'djermy9@liveinternet.ru', '0672c309adebe8c62dce9770b320b915', '1999-03-11'),
-(11, 'Prueba', 'DND', NULL, 'prueba@prueba.es', 'c893bad68927b457dbed39460e6afd62', '2000-01-01'),
-(12, 'Vaker0', 'Active', NULL, 'dani.vakero.1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2000-02-08'),
-(13, 'Natty', 'AFK', NULL, 'natty@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1998-09-10');
+(11, 'Seryix', 'DND', 'https://fakeimg.pl/75x75', 'prueba@prueba.es', 'c893bad68927b457dbed39460e6afd62', '2000-01-01'),
+(12, 'Vaker0', 'Active', 'https://fakeimg.pl/75x75', 'dani.vakero.1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2000-02-08'),
+(13, 'Natty', 'AFK', 'https://fakeimg.pl/75x75', 'natty@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1998-09-10');
 
 -- --------------------------------------------------------
 
@@ -209,9 +210,9 @@ ALTER TABLE `event`
   ADD KEY `eventOwnerId` (`eventOwnerId`);
 
 --
--- Indices de la tabla `eventRequirment`
+-- Indices de la tabla `eventRequirement`
 --
-ALTER TABLE `eventRequirment`
+ALTER TABLE `eventRequirement`
   ADD PRIMARY KEY (`eventRequirementId`);
 
 --
@@ -284,7 +285,7 @@ ALTER TABLE `user`
 -- Filtros para la tabla `event`
 --
 ALTER TABLE `event`
-  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`eventRequirementId`) REFERENCES `eventRequirment` (`eventRequirementId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`eventRequirementId`) REFERENCES `eventRequirement` (`eventRequirementId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `event_ibfk_2` FOREIGN KEY (`gameId`) REFERENCES `game` (`gameId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `event_ibfk_3` FOREIGN KEY (`eventOwnerId`) REFERENCES `user` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 

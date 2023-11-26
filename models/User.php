@@ -15,7 +15,7 @@ class User
 
         public function __construct()
         {
-                $this->profilePic = "noPic.png";
+                
         }
 
         public static function getAllUsers(): array

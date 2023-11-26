@@ -7,15 +7,36 @@
         public int $eventRequirementId;
         public ?string $maxRank;
         public ?string $minRank;
-        public ?int $minAge;
-        public ?int $maxAge;
+        public ?int $maxLvl;
+        public ?int $minLvl;
 
 
-        public function __construct(?string $maxRank, ?string $minRank, ?int $minAge, ?int $maxAge)
+        public function __construct()
         {
-            $this->maxRank = $maxRank;
-            $this->minRank = $minRank;
-            $this->minAge = $minAge;
-            $this->maxAge = $maxAge;
         }
+
+        /**
+         * Devuelve todos los requisitos de un evento
+         * @param int $eventId
+         * @return eventRequirement
+         */
+        public static function getEventRequirementById($id): ?eventRequirement {
+                
+                    // Establezco conexión con la base de datos
+                    $db = Connection::getConnection();
+
+                    if ($id == null) {
+                        return null;
+                    }
+    
+                    // Consulta a la base de datos, cogemos todas las columnas del requirement que coinciden con el ID pedido
+                    $db->query("SELECT * FROM eventRequirement WHERE eventRequirementId = $id;");
+
+                    $eventRequirement = $db->getRow("eventRequirement"); //Devuelve un objeto eventRequirement
+    
+                    //Devolvemos los requisitos de los eventos
+                    return $eventRequirement;
+        }
+
+        
     }
