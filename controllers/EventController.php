@@ -23,4 +23,12 @@ require_once "library/extra_functs.php";
                 array_push($_SESSION["eventParticipants"], $participantsArray);
             }
         } 
+
+        /**
+         * Esta función va a mostrar el formulario de cración de eventos
+         */
+        public function showCreateEvent() {
+
+            $this->render("event/createEvent.twig");
     }
+}

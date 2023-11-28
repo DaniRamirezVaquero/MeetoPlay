@@ -62,5 +62,23 @@
                 <img src="views/img/RightComposition.png" alt="RightComposition">
             </div>
         </div>
+        <div>Error:  {{ errCode }}</div>
+        {% if errCode != null %}
+        Entra
+        <div class="errCard">
+            <div class="errCard--img"><img src="views/img/errImg.png" alt=""></div>
+            <div class="errCard--error">Error</div>
+            {% if errCode == "voidInput" %}
+                <div class="errCard--errorMsg">Rellena todos los campos</div>
+            {% elseif errCode == "registeredEmail" %}
+                <div class="errCard--errorMsg">El email ya está registrado</div>
+            {% elseif errCode == "registeredUserName" %}
+                <div class="errCard--errorMsg">El nombre de usuario ya está registrado</div>
+            {% elseif errCode == "token" %}
+                <div class="errCard--errorMsg">Error de registro</div>
+            {% endif %}
+            <div class="errCard--tryAgainBtn"><a href="register">Volver a intentar</a></div>
+        </div>
+        {% endif %}
     </body>
 </html>

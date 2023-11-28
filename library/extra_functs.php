@@ -7,9 +7,9 @@ function redireccion(String $url):never {
     exit(header("Location: $url"));
 }
 
-function echoPre ($algo) {
+function echoPre (mixed $algo, bool $die = false) {
     echo "<pre>";
     echo print_r($algo);
     echo "</pre>";
-    die();
+    if($die) die();
 }

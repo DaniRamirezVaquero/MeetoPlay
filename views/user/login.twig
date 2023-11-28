@@ -55,5 +55,21 @@
                 <img src="views/img/RightComposition.png" alt="RightComposition">
             </div>
         </div>
+        Error: {{ errCode }}
+        {% if errCode != null %}
+        Entra
+        <div class="errCard">
+            <div class="errCard--img"><img src="views/img/errImg.png" alt=""></div>
+            <div class="errCard--error">Error</div>
+            {% if errCode == "voidInput" %}
+                <div class="errCard--errorMsg">Rellena todos los campos</div>
+            {% elseif errCode == "userNotFound" %}
+                <div class="errCard--errorMsg">Usuario o contraseña incorrecto</div>
+            {% elseif errCode == "token" %}
+                <div class="errCard--errorMsg">Error de logeo</div>
+            {% endif %}
+            <div class="errCard--tryAgainBtn"><a href="login">Volver a intentar</a></div>
+        </div>
+        {% endif %}
     </body>
 </html>

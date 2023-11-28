@@ -18,7 +18,9 @@ use FTP\Connection;
 
             $token = Anti_csrf::getAnti_csrf()->generateToken(); // Genero un token de seguridad
 
-            $this->render("user/login.twig", ["token" => $token]);
+            $errCode = $_GET["errCode"] ?? null;
+
+            $this->render("user/login.twig", ["token" => $token , "errCode" => $errCode]);
             
         }
 
@@ -30,7 +32,9 @@ use FTP\Connection;
 
             $token = Anti_csrf::getAnti_csrf()->generateToken(); // Genero un token de seguridad
 
-            $this->render("user/register.twig", ["token" => $token]);
+            $errCode = $_GET["errCode"] ?? null;
+
+            $this->render("user/register.twig", ["token" => $token, "errCode" => $errCode]);
         }
 
         /**
@@ -43,7 +47,6 @@ use FTP\Connection;
         }
 
 
-        //TODO: Añadir mensajes de error si procede tanto en el login como en el register
         /**
          * Registra a un usuario
          * @return
@@ -52,22 +55,22 @@ use FTP\Connection;
 
             // Compruebo si el token de seguridad es correcto
             if ($_POST["_csrf"] != $_SESSION["_csrf"]) {
-                redireccion("register?err=token"); // Si no es correcto redirijo a la página de login
+                redireccion("register?errCode=token"); // Si no es correcto redirijo a la página de login
             }
 
             //Compruebo si el formulario viene vacio
             if (empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["userName"]) || empty($_POST["bornDate"])) {
-                redireccion("register?err=voidInput"); // Si no es correcto redirijo a la página de login
+                redireccion("register?errCode=voidInput"); // Si no es correcto redirijo a la página de login
             }
 
             // Compruebo si el email ya existe
             if (User::emailExists($_POST["email"])) {
-                redireccion("register?err=registeredEmail"); // Si no es correcto redirijo a la página de login
+                redireccion("register?errCode=registeredEmail"); // Si no es correcto redirijo a la página de login
             }
 
             // Compruebo si el nombre de usuario ya existe
             if (User::userNameExists($_POST["userName"])) {
-                redireccion("register?err=registeredUserName"); // Si no es correcto redirijo a la página de login
+                redireccion("register?errCode=registeredUserName"); // Si no es correcto redirijo a la página de login
             }
 
             // Creo un nuevo usuario
@@ -127,13 +130,13 @@ use FTP\Connection;
 
             // Compruebo si el token de seguridad es correcto
             if ($_POST["_csrf"] != $_SESSION["_csrf"]) {
-                redireccion("ogin"); // Si no es correcto redirijo a la página de login
+                redireccion("login?errCode=token"); // Si no es correcto redirijo a la página de login
         
             }
 
             // Compruebo si el formulario viene vacio
             if (empty($_POST["email"]) || empty($_POST["password"])) {
-                redireccion("login?err"); // Redirijo a la página de login
+                redireccion("login?errCode=voidInput"); // Redirijo a la página de login
             }
 
             $user = User::loginUser($_POST["email"], $_POST["password"]);
@@ -143,7 +146,7 @@ use FTP\Connection;
                 $_SESSION["loginTime"] = time(); // Guarda el tiempo de inicio de sesión
                 redireccion("main");
             } else {
-                redireccion("login"); // Redirijo a la página de login 
+                redireccion("login?errCode=userNotFound"); // Redirijo a la página de login 
             }
         }
 
