@@ -1,6 +1,6 @@
 <?php 
 
-    require_once "vendor/autoload.php";
+    require_once $_SESSION['rootPath']."/vendor/autoload.php";
 
     class TwigExtensons extends \Twig\Extension\AbstractExtension {
 

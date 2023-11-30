@@ -1,6 +1,6 @@
 <?php 
 
-    require_once "library/Connection.php";
+    require_once $_SESSION['rootPath']."/library/connection.php";
 
     class Follower_Followed {
 

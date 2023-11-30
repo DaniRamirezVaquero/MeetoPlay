@@ -1,6 +1,6 @@
 <?php
 
-require_once "library/Connection.php";
+require_once $_SESSION['rootPath']."/library/connection.php";
 
 class User
 {
@@ -65,7 +65,7 @@ class User
                 $db->close();
         }
 
-        public static function loginUser(string $email, string $password)
+        public static function loginUser(string $email, string $password): user
         {
 
                 // Establezco conexión con la base de datos

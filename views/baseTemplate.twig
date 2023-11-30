@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeetoPlay_Main_Events</title>
+    <title>MeetoPlay</title>
     <link href="favicon.ico" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="./views/css/baseTemplateStyles.css">
     <link rel="stylesheet" href="./views/css/eventsFeedStyles.css">
@@ -26,37 +26,37 @@
                                     <div class="pinnedChats--groupName">Chats Fijados</div>
                                 </div>
                                 <div class="pinnedChats">
-                                    {% if followedUsers != null %}
+                                    {% if data.followedUsers != null %}
                                         <div class="pinnedChat1">
                                             <div class="pinnedChat1Bg">
-                                                <div class="pinnedChat1--profPic"><img src="{{ followedUsers[0].profilePic|raw }}" alt="profilePic"></div>
-                                                <div class="pinnedChat1--userName">{{ followedUsers[0].userName }}</div>
+                                                <div class="pinnedChat1--profPic"><img src="{{ data.followedUsers[0].profilePic|raw }}" alt="profilePic"></div>
+                                                <div class="pinnedChat1--userName">{{ data.followedUsers[0].userName }}</div>
                                                 <div class="pinnedChat1--userStatus">
-                                                    {% if followedUsers[0].userStatus == "Active" %}
+                                                    {% if data.followedUsers[0].userStatus == "Active" %}
                                                         <div class="pinnedChat1--userStatusActive"></div>
-                                                    {% elseif followedUsers[0].userStatus == "DND" %}
+                                                    {% elseif data.followedUsers[0].userStatus == "DND" %}
                                                         <div class="pinnedChat1--userStatusDND"></div>
                                                     {% else %}
                                                         <div class="pinnedChat1--userStatusAFK"></div>
                                                     {% endif %}
-                                                    <div class="pinnedChat1--userStatusT">{{ followedUsers[0].userStatus }}</div>
+                                                    <div class="pinnedChat1--userStatusT">{{ data.followedUsers[0].userStatus }}</div>
                                                 </div>
                                                 <div class="pinnedChat1--chatIcon"><img src="./views/img/chatIconBPW.png" alt="chatIcon"></div>
                                             </div>
                                         </div>
                                         <div class="pinnedChat2">
                                             <div class="pinnedChat2Bg">
-                                                <div class="pinnedChat2--profPic"><img src="{{ followedUsers[1].profilePic|raw }}" alt="profilePic"></div>
-                                                <div class="pinnedChat2--userName">{{ followedUsers[1].userName }}</div>
+                                                <div class="pinnedChat2--profPic"><img src="{{ data.followedUsers[1].profilePic|raw }}" alt="profilePic"></div>
+                                                <div class="pinnedChat2--userName">{{ data.followedUsers[1].userName }}</div>
                                                 <div class="pinnedChat2--userStatus">
-                                                    {% if followedUsers[1].userStatus == "Active" %}
+                                                    {% if data.followedUsers[1].userStatus == "Active" %}
                                                         <div class="pinnedChat2--userStatusActive"></div>
-                                                    {% elseif followedUsers[1].userStatus == "DND" %}
+                                                    {% elseif data.followedUsers[1].userStatus == "DND" %}
                                                         <div class="pinnedChat2--userStatusDND"></div>
                                                     {% else %}
                                                         <div class="pinnedChat2--userStatusAFK"></div>
                                                     {% endif %}
-                                                    <div class="pinnedChat2--userStatusT">{{ followedUsers[1].userStatus }}</div>
+                                                    <div class="pinnedChat2--userStatusT">{{ data.followedUsers[1].userStatus }}</div>
                                                 </div>
                                                 <div class="pinnedChat2--chatIcon"><img src="./views/img/chatIconBPW.png" alt="chatIcon"></div>
                                             </div>
@@ -122,18 +122,18 @@
                 <div class="profileCard--Bg">
                     <div class="userdata">
                         <div class="userdata--userProfPic">
-                            <img src="{{ logedUser.profilePic }}" alt="userProfilePic">
+                            <img src="{{ data.logedUser.profilePic }}" alt="userProfilePic">
                         </div>
-                        <div class="userdata--userName">{{ logedUser.userName }}</div>
+                        <div class="userdata--userName">{{ data.logedUser.userName }}</div>
                         <div class="userdata--userStatus">
-                            {% if logedUser.userStatus == "Active" %}
+                            {% if data.logedUser.userStatus == "Active" %}
                                 <div class="userdata--userStatusActive"></div>
-                            {% elseif logedUser.userStatus == "DND" %}
+                            {% elseif data.logedUser.userStatus == "DND" %}
                                 <div class="userdata--userStatusDND"></div>
                             {% else %}
                                 <div class="userdata--userStatusAFK"></div>
                             {% endif %}
-                            <div class="userdata--userStatusT">{{ logedUser.userStatus }}</div>                  
+                            <div class="userdata--userStatusT">{{ data.logedUser.userStatus }}</div>                  
                         </div>
                     </div>
                     <div class="btns">
@@ -149,11 +149,11 @@
                         <div class="playingdata--gameLogo">
                             <img src="img/gameLogos/lolLogo.png" alt="gameLogo">
                         </div>
-                        <div class="playingdata--gameName">{{ games[0].gameName }}</div>
+                        <div class="playingdata--gameName">{{ data.games[0].gameName }}</div>
                         <div class="playingdata--gameMode">Ranked 5 vs 5</div>
                         <div class="playingdata--gameTime">Tiempo en partida: 17:15</div>
-                        <div class="playingdata--gameRank">Rango: {{ userGameStats[0].maxRank }}</div>
-                        <div class="playingdata--gameLvl">Nivel: {{ userGameStats[0].level }}</div>
+                        <div class="playingdata--gameRank">Rango: {{ data.userGameStats[0].maxRank }}</div>
+                        <div class="playingdata--gameLvl">Nivel: {{ data.userGameStats[0].level }}</div>
                     </div>
                 </div>
                 {% endblock %}

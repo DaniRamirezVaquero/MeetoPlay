@@ -2,11 +2,11 @@
 
 use FTP\Connection;
 
-    require_once "Controller.php";
-    require_once "EventController.php";
-    require_once "models/User.php";
-    require_once "library/Anti_csrf.php";
-    require_once "library/extra_functs.php";
+    require_once  $_SESSION['rootPath']."/controllers/controller.php";
+    require_once  $_SESSION['rootPath']."/controllers/eventController.php";
+    require_once $_SESSION['rootPath']."/models/user.php";
+    require_once $_SESSION['rootPath']."/library/Anti_csrf.php";
+    require_once $_SESSION['rootPath']."/library/extra_functs.php";
 
     class userController extends Controller {
 
@@ -86,7 +86,7 @@ use FTP\Connection;
             $user->email = $_POST["email"];
             $user->password = $password;
             $user->bornDate = $bornDate;
-            $user->profilePic = "img/profilePics/defaultProfilePic.jpg";
+            $user->profilePic = $_SESSION['rootPath']."/img/profilePics/defaultProfilePic.jpg";
             $user->userStatus = "Active";
 
             // Guardo el usuario en la base de datos

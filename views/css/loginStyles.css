@@ -7,10 +7,10 @@ body {
 }
 
 .SingIn {
-    width: 1920px;
+    width: 100vw;
     height: 1080px;
     position: relative;
-    background: white;
+    background: #E9E6FF;
     font-family: 'Kanit', sans-serif;
 }
 

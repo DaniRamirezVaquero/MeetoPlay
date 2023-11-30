@@ -1,10 +1,9 @@
 <?php
 
-require_once "library/extra_functs.php";
-
-require_once "library/Connection.php";
-require_once "models/User.php";
-require_once "models/EventRequirement.php";
+require_once $_SESSION['rootPath']."/library/extra_functs.php";
+require_once $_SESSION['rootPath']."/library/connection.php";
+require_once $_SESSION['rootPath']."/models/user.php";
+require_once $_SESSION['rootPath']."/models/eventRequirement.php";
 
 
 class event
@@ -80,6 +79,13 @@ class event
                 //Devolvemos los eventos
                 return $db->getAll("event");
         }
+
+        /**
+         * Formatea la fecha y la hora para que se muestre correctamente en la tarjeta del evento
+         * @param string $date
+         * @param string $hour
+         * @
+         */
 
         public static function formatDate (string $date)  {
                 $date = date_create($date);

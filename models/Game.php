@@ -2,7 +2,7 @@
 
 // TODO: Implementar gameModes como string separado con ':' en la base de datos y crear un array con los modos de juego
 
-require_once "library/Connection.php";
+require_once $_SESSION['rootPath']."/library/connection.php";
 
 class Game
 {

@@ -1,7 +1,7 @@
 <?php
 
-    require_once "library/Connection.php";
-    require_once "models/User_Join_Event.php";
+    require_once $_SESSION['rootPath']."/library/connection.php";
+    require_once $_SESSION['rootPath']."/models/user_join_event.php";
 
     function UserJoinedEvent($eventId, $userId) {
 

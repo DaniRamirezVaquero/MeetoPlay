@@ -1,7 +1,7 @@
 <?php
 
-require_once "vendor/autoload.php";
-require_once "library/TwigFunctions.php";
+require_once $_SESSION['rootPath']."/vendor/autoload.php";
+require_once $_SESSION['rootPath']."/library/TwigFunctions.php";
 
 abstract class Controller {
 
@@ -14,11 +14,12 @@ abstract class Controller {
 
         //Configuramosla librería Twig indicandole la ruta hasta la view
         // Cargamos el directorio de plantillas
-        $loader = new \Twig\Loader\FilesystemLoader("views");
-        $this->twig = new \Twig\Environment($loader);
+        $loader = new \Twig\Loader\FilesystemLoader($_SESSION['rootPath']."/views");
+        $this->twig = new \Twig\Environment($loader, ["debug" => true]);
 
         //Añado funciones personalizadas a Twig
         $this->twig->addFunction(new \Twig\TwigFunction('UserJoinedEvent', 'UserJoinedEvent'));
+        $this->twig->addExtension(new \Twig\Extension\DebugExtension());
 
     }
 
