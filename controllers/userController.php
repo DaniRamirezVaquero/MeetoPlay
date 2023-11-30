@@ -167,7 +167,7 @@ use FTP\Connection;
             $user = unserialize($_SESSION["user"]);
 
             User_Join_Event::joinEvent($user->userId, $_GET["eventId"]);
-            redireccion("/MeetoPlay/main");
+            redireccion("/main");
         }
 
         /**
@@ -178,6 +178,6 @@ use FTP\Connection;
             $user = unserialize($_SESSION["user"]);
 
             User_Join_Event::unJoinEvent($user->userId, $_GET["eventId"]);
-            redireccion("/MeetoPlay/main");
+            redireccion("/main");
     }
 }
