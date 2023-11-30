@@ -47,21 +47,21 @@ class mainController extends Controller
             if ($event->eventRequirementId != null) {
                 array_push($eventsRequirements, eventRequirement::getEventRequirementById($event->eventRequirementId));
             }
-
-            //Guardo los participantes de cada evento en la sesión
-            EventController::loadEventParticipant($event);
         }
 
+        
         $users = User::getAllUsers(); // Cogemos todos los usuarios como array
         $followedUsers = User::getAllFollowedUsers($loggedInUser->userId); // Cogemos todos los usuarios seguidos como array
         $userGameStats = Stat::getStatsByUserId($loggedInUser->userId); // Cogemos las estadisticas del usuario logeado
         $games = Game::getAllGames(); // Cogemos todos los juegos como array
+        $eventsParticipants = EventController::getEventsParticipants($loggedInUser->userId); // Cogemos todos los participantes de los eventos de los usuarios seguidos por el usuario logeado
 
         $data = [];
         $data = 
         [
             "events" => $events,
             "eventsRequirements" => $eventsRequirements,
+            "eventsParticipants" => $eventsParticipants,
             "users" => $users, 
             "followedUsers" => $followedUsers,
             "logedUser" => $loggedInUser,

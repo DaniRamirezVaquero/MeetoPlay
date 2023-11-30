@@ -13,15 +13,24 @@ require_once $_SESSION['rootPath']."/library/extra_functs.php";
          * Esta función guarda en la sessión los participantes de un evento
          * @param Event $event
          */
-        public static function loadEventParticipant(Event $event) {
+        public static function getEventsParticipants($userId): array {
             
-            if ($event->participants != null) {
+            $events = Event::getAllEventsByFollowedUsers($userId); // Cogemos todos los eventos de los usuarios seguidos por el usuario logeado
 
-                $participants = $event->participants;
-                $participantsArray = explode(",", $participants);
+            $eventParticipants = [];
 
-                array_push($_SESSION["eventParticipants"], $participantsArray);
+            foreach ($events as $event) {
+
+                if ($event->participants == null) {
+                    $participantsArray = [];
+                } else {
+                    $participantsArray = explode(",", $event->participants);
+                }
+
+                array_push($eventParticipants, $participantsArray);
             }
+                
+            return $eventParticipants;
         } 
 
         /**

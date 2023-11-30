@@ -29,6 +29,7 @@ class event
         {
         }
 
+
         /**
          * Devuelve todos los eventos de un usuario
          * @param int $userId

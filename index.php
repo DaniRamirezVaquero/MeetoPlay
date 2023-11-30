@@ -5,7 +5,10 @@ require_once "library/extra_functs.php";
 
     session_start(); // Inicio la sesión
 
-    $_SESSION['rootPath'] = $_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
+    $_SESSION['rootPath'] = __DIR__; // Ruta hasta la carpeta raíz del proyecto
+
+    // echoPre($_SESSION['rootPath']);
+    
 
     $model = $_GET["m"]??$_POST["m"]?? "user"; 
     $function = $_GET["f"]??$_POST["f"]?? "showLogin"; 
