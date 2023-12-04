@@ -1,9 +1,8 @@
 <?php
 
-use FTP\Connection;
-
     require_once  $_SESSION['rootPath']."/controllers/controller.php";
     require_once  $_SESSION['rootPath']."/controllers/eventController.php";
+    require_once  $_SESSION['rootPath']."/controllers/mainController.php";
     require_once $_SESSION['rootPath']."/models/user.php";
     require_once $_SESSION['rootPath']."/library/Anti_csrf.php";
     require_once $_SESSION['rootPath']."/library/extra_functs.php";
@@ -15,6 +14,8 @@ use FTP\Connection;
          * @return
          */
         public function showLogin () {
+
+            checkSession(); // Compruebo si el usuario ya ha iniciado sesión
 
             $token = Anti_csrf::getAnti_csrf()->generateToken(); // Genero un token de seguridad
 
@@ -29,6 +30,8 @@ use FTP\Connection;
          * @return
          */
         public function showRegister () {
+
+            checkSession(); // Compruebo si el usuario ya ha iniciado sesión
 
             $token = Anti_csrf::getAnti_csrf()->generateToken(); // Genero un token de seguridad
 
@@ -131,7 +134,6 @@ use FTP\Connection;
             // Compruebo si el token de seguridad es correcto
             if ($_POST["_csrf"] != $_SESSION["_csrf"]) {
                 redireccion("login?errCode=token"); // Si no es correcto redirijo a la página de login
-        
             }
 
             // Compruebo si el formulario viene vacio
@@ -141,13 +143,25 @@ use FTP\Connection;
 
             $user = User::loginUser($_POST["email"], $_POST["password"]);
 
-            if (!is_null($user)) {
+            if (!is_null($user) && !is_bool($user)) {
                 $_SESSION["user"] = serialize($user); // Guarda el user en la sesión
                 $_SESSION["loginTime"] = time(); // Guarda el tiempo de inicio de sesión
+                $_SESSION["loggedIn"] = true; // Guarda el estado de inicio de sesión
                 redireccion("main");
             } else {
                 redireccion("login?errCode=userNotFound"); // Redirijo a la página de login 
             }
+        }
+
+        /**
+         * Muestra la configuración 
+         * @return
+         */
+        public function showConfig () {
+
+            $baseTemplateData = mainController::prepareBaseTemplateData();
+
+            $this->render("user/config.twig", ["baseTemplateData" => $baseTemplateData]);
         }
 
         /**

@@ -1,5 +1,103 @@
 {% extends "baseTemplate.twig" %}
 
 {% block mainContent %}
-    <h1>Home</h1>
+    <div class="newEvent--container">
+        <div class="newEvent--bg">
+            <form action="index.php" method="POST">
+
+                <input type="hidden" name="m" value="event"/>
+                <input type="hidden" name="f" value="createNewEvent"/>
+
+                <div class="newEvent--form--container">
+                    <div class="newEvent--form--title title">Nuevo evento</div>
+                    <div class="newEvent--form--what rowtitle">¿A qué jugamos?</div>
+                        <div class="newEvent--form--what--inputs--eventTitle">
+                            <label for="eventTitle" class="inputLabel">Título del evento:<br> </label>
+                            <input required type="text" class="newEvent--form--input" name="eventTitle">
+                        </div>
+                        <div class="newEvent--form--what--inputs--eventPlatform">
+                            <label for="eventPlatForm" class="inputLabel">Plataforma:<br></label>
+                            <input required type="text" class="newEvent--form--input" name="eventPlatform">
+                        </div>
+                        <div class="newEvent--form--what--inputs--eventGame">
+                            <label for="eventGame" class="inputLabel">Juego:<br></label>
+                            <input required type="text" class="newEvent--form--input" name="eventGame">
+                        </div>
+                        <div class="newEvent--form--what--inputs--eventGameMode">
+                            <label for="eventGameMode" class="inputLabel">Modo de juego:<br></label>
+                            <input required type="text" class="newEvent--form--input" name="eventGameMode">
+                        </div>
+                        <div class="newEvent--form--when rowtitle">¿Cuándo?</div>
+                        <div class="newEvent--form--requirments rowtitle">Requesitos</div>
+                        <div class="newEvent--form--when--inputs--dateBegin">
+                            <label for="dateBegin" class="inputLabel">Fecha de inicio:<br></label>
+                            <input required type="date" class="newEvent--form--input" name="dateBegin">
+                        </div>
+                        <div class="newEvent--form--when--inputs--hourBegin">
+                            <label for="hourBegin" class="inputLabel">Hora de inicio:<br></label>
+                            <input required type="time" class="newEvent--form--input" name="hourBegin">
+                        </div>
+                        <div class="newEvent--form--requirments--inputs--minLvl">
+                            <label for="minLvl" class="inputLabel">Nivel mínimo:<br></label>
+                            <input type="number" class="newEvent--form--input" name="minLvl" placeholder="Opcional">
+                        </div>
+                        <div class="newEvent--form--requirments--inputs--maxLvl">
+                            <label for="maxLvl" class="inputLabel">Nivel máximo:<br></label>
+                            <input type="number" class="newEvent--form--input" name="maxLvl" placeholder="Opcional">
+                        </div>
+                        <div class="newEvent--form--when--inputs--dateEnd">
+                            <label for="dateEnd" class="inputLabel">Fecha de fin:<br></label>
+                            <input required type="date" class="newEvent--form--input" name="dateEnd">
+                        </div>
+                        <div class="newEvent--form--when--inputs--hourEnd">
+                            <label for="hourEnd" class="inputLabel">Hora de fin:<br></label>
+                            <input required type="time" class="newEvent--form--input" name="hourEnd">
+                        </div>
+                        <div class="newEvent--form--requirments--inputs--minRank">
+                            <label for="minRank" class="inputLabel">Rango mínimo:<br></label>
+                            <input type="text" class="newEvent--form--input" name="minRank" placeholder="Opcional">
+                        </div>
+                        <div class="newEvent--form--requirments--inputs--maxRank">
+                            <label for="maxRank" class="inputLabel">Rango máximo:<br></label>
+                            <input type="text" class="newEvent--form--input" name="maxRank" placeholder="Opcional">
+                        </div>
+                        <div class="newEvent--form--inscriptionDate rowtitle">Plazo de inscripción</div>
+                        <div class="newEvent--form--who rowtitle">¿Quíenes?</div>
+                        <div class="newEvent--form--inscriptionDate--inputs--dateBegin">
+                            <label for="dateBegin" class="inputLabel">Fecha de inicio:<br></label>
+                            <input required type="date" class="newEvent--form--input" name="inscriptionDateBegin">
+                        </div>
+                        <div class="newEvent--form--inscriptionDate--inputs--hourBegin">
+                            <label for="hourBegin" class="inputLabel">Hora de inicio:<br></label>
+                            <input required type="time" class="newEvent--form--input" name="inscriptionHourBegin">
+                        </div>
+                        <div class="newEvent--form--who-inputs--slots">
+                            <label for="slots" class="inputLabel">Plazas:<br></label>
+                            <input required type="text" class="newEvent--form--input" name="slots">
+                        </div>
+                        <div class="newEvent--form--who-inputs--privacy">
+                            <label for="privacy" class="inputLabel">Privacidad:<br></label>
+                            <select disabled name="privacy" class="newEvent--form--input">
+                                <option value="public">Público</option>
+                                <option value="private">Privado</option>
+                            </select>
+                        </div>
+                        <div class="newEvent--form--inscriptionDate--inputs--dateEnd">
+                            <label for="dateEnd" class="inputLabel">Fecha de fin:<br></label>
+                            <input required type="date" class="newEvent--form--input" name="inscriptionDateEnd">
+                        </div>
+                        <div class="newEvent--form--inscriptionDate--inputs--hourEnd">
+                            <label for="hourEnd" class="inputLabel">Hora de fin:<br></label>
+                            <input required type="time" class="newEvent--form--input" name="inscriptionHourEnd">
+                        </div>
+                        <div class="newEvent--cancellBtn">
+                            <a href="javascript:history.back(-1);"><div class="newEvent--cancellBtn--content">Cancelar</div></a>
+                        </div>
+                        <div class="newEvent--createBtn">
+                            <a href="createNewEvent"><div class="newEvent--createBtn--content">Unirse</div></a>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

@@ -38,5 +38,23 @@
                     return $eventRequirement;
         }
 
-        
+        /**
+         * Crea un nuevo requisito de evento
+         * @param string $maxRank
+         * @param string $minRank
+         * @param int $maxLvl
+         * @param int $minLvl
+         * @return eventRequirement
+         */
+        public static function createEventRequirement(string $maxRank, string $minRank, int $maxLvl, int $minLvl): int {
+
+            // Establezco conexión con la base de datos
+            $db = Connection::getConnection();
+
+            // Consulta a la base de datos, insertamos los datos del evento
+            $db->query("INSERT INTO eventRequirement (maxRank, minRank, maxLvl, minLvl) VALUES ('$maxRank', '$minRank', '$maxLvl', '$minLvl');");
+
+            //Devolvemos el id el eventRequirement que acabamos de crear
+            return $db->lastInsertId();
+        }
     }

@@ -9,6 +9,9 @@ body {
 }
 
 .Background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #E9E6FF;
     width: 100%;
     height: 100%;
@@ -17,9 +20,9 @@ body {
 
 .gradientBg {
     position: absolute;
-    top: 25px;
-    left: 25px;
-    width: 1870px;
+    top: 15px;
+    left: 15px;
+    width: 1850px;
     height: 920px;
     background: linear-gradient(180deg, #B46DFF 0%, #58FFFF 100%);
     border-radius: 15px;
@@ -350,7 +353,7 @@ body {
     position: absolute;
     top: 25px;
     left: 1425px;
-    width: 420px;
+    width: 400px;
     height: 675px;
     background: #E9E6FF;
     border-radius: 15px;
@@ -360,7 +363,7 @@ body {
     position: absolute;
     top: 15px;
     left: 15px;
-    width: 390px;
+    width: 370px;
     height: 320px;
     background: linear-gradient(180deg, #B46DFF 0%, #88B3FF 100%);
     border-radius: 15px;
@@ -395,7 +398,7 @@ body {
     position: absolute;
     top: 350px;
     left: 15px;
-    width: 390px;
+    width: 370px;
     height: 230px;
     background: linear-gradient(180deg, #84B8FF 0%, #70D9FF 100%);
     border-radius: 15px;
@@ -430,7 +433,7 @@ body {
     position: absolute;
     top: 595px;
     left: 15px;
-    width: 390px;
+    width: 370px;
     height: 50px;
     background: linear-gradient(180deg, #75D2FF 0%, #71D6FF 100%);
     border-radius: 15px;
@@ -465,7 +468,7 @@ body {
     position: absolute;
     top: 720px;
     left: 1425px;
-    width: 420px;
+    width: 400px;
     height: 175px;
     background: #E9E6FF;
     border-radius: 15px;
@@ -547,6 +550,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 5px;
+    box-sizing: border-box;
 }
 
 .btn--newEvent img {
@@ -560,11 +565,13 @@ body {
     left: 85px;
     width: 55px;
     height: 55px;
+    box-sizing: border-box;
     background: linear-gradient(180deg, #61F0FF 0%, #5BF9FF 100%);
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 5px;
 }
 
 .btn--config img {
@@ -587,7 +594,7 @@ body {
     position: absolute;
     top: 40px;
     left: 155px;
-    width: 250px;
+    width: 230px;
     height: 120px;
     background-color: #262626;
     border-radius: 15px;
@@ -651,7 +658,7 @@ body {
 .playingdata--gameLvl {
     position: absolute;
     top: 90px;
-    left: 170px;
+    left: 160px;
     color: whitesmoke;
     font-size: 12px;
     font-weight: 300;

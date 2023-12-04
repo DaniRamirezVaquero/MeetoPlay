@@ -1,10 +1,12 @@
 RewriteEngine on
 
-RewriteBase /MeetoPlay/
-
 RewriteRule ^login$ index.php?m=user&f=showLogin [L,QSA]
+RewriteRule ^logout$ index.php?m=user&f=logout [L,QSA]
 RewriteRule ^register$ index.php?m=user&f=showRegister [L,QSA]
 RewriteRule ^main$ index.php?m=main&f=showMainPage [L]
 RewriteRule ^joinEvent/([1-9][0-9]*)$ index.php?m=user&f=joinEvent&eventId=$1 [L]
 RewriteRule ^unjoinEvent/([1-9][0-9]*)$ index.php?m=user&f=unjoinEvent&eventId=$1 [L]
 RewriteRule ^newEvent$ index.php?m=event&f=showCreateEvent [L]
+RewriteRule ^createEvent$ index.php?m=event&f=createEvent [L,QSA]
+RewriteRule ^config$ index.php?m=user&f=showConfig [L]
+

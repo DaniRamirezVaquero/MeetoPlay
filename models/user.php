@@ -65,7 +65,7 @@ class User
                 $db->close();
         }
 
-        public static function loginUser(string $email, string $password): user
+        public static function loginUser(string $email, string $password): mixed 
         {
 
                 // Establezco conexión con la base de datos

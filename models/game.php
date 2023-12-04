@@ -1,7 +1,5 @@
 <?php
 
-// TODO: Implementar gameModes como string separado con ':' en la base de datos y crear un array con los modos de juego
-
 require_once $_SESSION['rootPath']."/library/connection.php";
 
 class Game
@@ -29,6 +27,24 @@ class Game
 
                 //Devolvemos los juegos
                 return $db->getAll("game");
+        }
+
+        /**
+         * Comprueba si un juego existe en la base de datos
+         * @param string $gameName
+         * @return bool
+         */
+        public static function gameExists(string $gameName): bool {
+
+                // Establezco conexión con la base de datos
+                $db = Connection::getConnection();
+
+                // Consulta a la base de datos, cogemos todos los juegos
+                $db->query("SELECT * FROM game WHERE gameName = '$gameName';");
+                $game=$db->getRow("Game");
+
+                //Devolvemos los juegos
+                return $game != null;
         }
 
         /**
@@ -63,9 +79,6 @@ class Game
                 // Consulta a la base de datos, cogemos el juego que coincide con el ID pedido
                 $db->query("SELECT gameId FROM game WHERE gameName = '$gameName';");
                 $gameId = $db->getRow("Game"); //Devuelve un objeto game
-
-                // Cierro la conexión con la base de datos
-                $db->close();
 
                 //Devolvemos el juego
                 return $gameId->gameId;

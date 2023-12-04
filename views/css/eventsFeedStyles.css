@@ -33,19 +33,13 @@
     color: whitesmoke;
 }
 
+
 .eventCard--dropDownBtn {
     position: absolute;
     top: 10.5px;
     left: 512.5px;
     width: 20px;
     height: 20px;
-}
-
-.eventCard--dropDownBtn button {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
 }
 
 .eventCard--gameInfo {
@@ -127,7 +121,7 @@
     position: absolute;
     width: 300px;
     height: 125px;
-    top: 210px;
+    top: 205px;
     left: 40px;
     font-weight: 300;
 }
@@ -236,6 +230,11 @@
     font-weight: 300;
 }
 
+.eventCard--btns a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
 .eventCard--btns--joinBtn--normal--border{
     width: 140px;
     height: 50px;
@@ -267,11 +266,6 @@
     align-items: center;
 }
 
-.eventCard--btns--joinBtn--normal--content a {
-    text-decoration: none;
-    color: whitesmoke;
-}
-
 .eventCard--btns--joinBtn--green--border{
     width: 140px;
     height: 50px;
@@ -301,9 +295,4 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.eventCard--btns--joinBtn--green--content a {
-    text-decoration: none;
-    color: whitesmoke;
 }
