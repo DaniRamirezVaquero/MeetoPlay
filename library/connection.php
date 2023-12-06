@@ -2,8 +2,6 @@
 
     require_once $_SESSION['rootPath']."/library/extra_functs.php";
 
-    //TODO: Cambiar a PDO
-
     class Connection {
         
         private static ?Connection $instance = null; // '?Connection' indica que puede ser null
