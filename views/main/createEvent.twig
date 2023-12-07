@@ -1,9 +1,13 @@
 {% extends "baseTemplate.twig" %}
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script defer src="./views/js/searcher-ajax-script.js"></script>
+{% endblock %}
 
 {% block mainContent %}
     <div class="newEvent--container">
         <div class="newEvent--bg">
-            <form action="index.php" method="POST">
+            <form action="index.php" method="POST" id="form">
 
                 <input type="hidden" name="m" value="event"/>
                 <input type="hidden" name="f" value="createNewEvent"/>
@@ -13,91 +17,113 @@
                     <div class="newEvent--form--what rowtitle">¿A qué jugamos?</div>
                         <div class="newEvent--form--what--inputs--eventTitle">
                             <label for="eventTitle" class="inputLabel">Título del evento:<br> </label>
-                            <input required type="text" class="newEvent--form--input" name="eventTitle">
+                            <input required type="text" id="eventTitle" class="newEvent--form--input" name="eventTitle" value="Miancrah">
                         </div>
                         <div class="newEvent--form--what--inputs--eventPlatform">
                             <label for="eventPlatForm" class="inputLabel">Plataforma:<br></label>
-                            <input required type="text" class="newEvent--form--input" name="eventPlatform">
+                            <input required type="text" id="eventPlatForm" class="newEvent--form--input" name="eventPlatform" value="PC">
                         </div>
+
+
                         <div class="newEvent--form--what--inputs--eventGame">
-                            <label for="eventGame" class="inputLabel">Juego:<br></label>
-                            <input required type="text" class="newEvent--form--input" name="eventGame">
+                            <label for="eventGame" class="inputLabel">Buscador:<br></label>
+                            <input required list="gameList" autocomplete="off" id="eventGame" class="newEvent--form--input" placeholder="Buscador juegos" >
                         </div>
+                        <div class="newEventform--what--inputs--eventGame--select">
+                            <label for="eventGame" class="inputLabel">Juego:<br></label>
+                            <select id="gameList" class="newEvent--from--inputs--eventGame--select" name="eventGame"></select>
+                        </div>
+                        
                         <div class="newEvent--form--what--inputs--eventGameMode">
                             <label for="eventGameMode" class="inputLabel">Modo de juego:<br></label>
-                            <input required type="text" class="newEvent--form--input" name="eventGameMode">
+                            <input required type="text" id="eventGameMode" class="newEvent--form--input" name="eventGameMode" value="Survival">
                         </div>
                         <div class="newEvent--form--when rowtitle">¿Cuándo?</div>
                         <div class="newEvent--form--requirments rowtitle">Requesitos</div>
                         <div class="newEvent--form--when--inputs--dateBegin">
                             <label for="dateBegin" class="inputLabel">Fecha de inicio:<br></label>
-                            <input required type="date" class="newEvent--form--input" name="dateBegin">
+                            <input required type="date" id="dateBegin" class="newEvent--form--input" name="dateBegin" value="2023-12-01">
                         </div>
                         <div class="newEvent--form--when--inputs--hourBegin">
                             <label for="hourBegin" class="inputLabel">Hora de inicio:<br></label>
-                            <input required type="time" class="newEvent--form--input" name="hourBegin">
+                            <input required type="time" id="hourBegin" class="newEvent--form--input" name="hourBegin" value="19:00">
                         </div>
                         <div class="newEvent--form--requirments--inputs--minLvl">
                             <label for="minLvl" class="inputLabel">Nivel mínimo:<br></label>
-                            <input type="number" class="newEvent--form--input" name="minLvl" placeholder="Opcional">
+                            <input type="number" id="minLvl" class="newEvent--form--input" name="minLvl" placeholder="Opcional" min="0" pattern="^[0-9]+">
                         </div>
                         <div class="newEvent--form--requirments--inputs--maxLvl">
                             <label for="maxLvl" class="inputLabel">Nivel máximo:<br></label>
-                            <input type="number" class="newEvent--form--input" name="maxLvl" placeholder="Opcional">
+                            <input type="number" id="maxLvl" class="newEvent--form--input" name="maxLvl" placeholder="Opcional" min="0" pattern="^[0-9]+">
                         </div>
                         <div class="newEvent--form--when--inputs--dateEnd">
                             <label for="dateEnd" class="inputLabel">Fecha de fin:<br></label>
-                            <input required type="date" class="newEvent--form--input" name="dateEnd">
+                            <input required type="date" id="dateEnd" class="newEvent--form--input" name="dateEnd" value="2023-12-02">
                         </div>
                         <div class="newEvent--form--when--inputs--hourEnd">
                             <label for="hourEnd" class="inputLabel">Hora de fin:<br></label>
-                            <input required type="time" class="newEvent--form--input" name="hourEnd">
+                            <input required type="time" id="hourEnd" class="newEvent--form--input" name="hourEnd" value="19:00">
                         </div>
                         <div class="newEvent--form--requirments--inputs--minRank">
                             <label for="minRank" class="inputLabel">Rango mínimo:<br></label>
-                            <input type="text" class="newEvent--form--input" name="minRank" placeholder="Opcional">
+                            <input type="text" id="minRank" class="newEvent--form--input" name="minRank" placeholder="Opcional">
                         </div>
                         <div class="newEvent--form--requirments--inputs--maxRank">
                             <label for="maxRank" class="inputLabel">Rango máximo:<br></label>
-                            <input type="text" class="newEvent--form--input" name="maxRank" placeholder="Opcional">
+                            <input type="text" id="maxRank" class="newEvent--form--input" name="maxRank" placeholder="Opcional">
                         </div>
                         <div class="newEvent--form--inscriptionDate rowtitle">Plazo de inscripción</div>
                         <div class="newEvent--form--who rowtitle">¿Quíenes?</div>
                         <div class="newEvent--form--inscriptionDate--inputs--dateBegin">
-                            <label for="dateBegin" class="inputLabel">Fecha de inicio:<br></label>
-                            <input required type="date" class="newEvent--form--input" name="inscriptionDateBegin">
+                            <label for="inscriptionDateBegin" class="inputLabel">Fecha de inicio:<br></label>
+                            <input required type="date" id="inscriptionDateBegin" class="newEvent--form--input" name="inscriptionDateBegin" value="2023-12-01">
                         </div>
                         <div class="newEvent--form--inscriptionDate--inputs--hourBegin">
-                            <label for="hourBegin" class="inputLabel">Hora de inicio:<br></label>
-                            <input required type="time" class="newEvent--form--input" name="inscriptionHourBegin">
+                            <label for="inscriptionHourBegin" class="inputLabel">Hora de inicio:<br></label>
+                            <input required type="time" id="inscriptionHourBegin" class="newEvent--form--input" name="inscriptionHourBegin" value="10:00">
                         </div>
                         <div class="newEvent--form--who-inputs--slots">
                             <label for="slots" class="inputLabel">Plazas:<br></label>
-                            <input required type="text" class="newEvent--form--input" name="slots">
+                            <input required type="text" id="slots" class="newEvent--form--input" name="slots" value="5">
                         </div>
                         <div class="newEvent--form--who-inputs--privacy">
                             <label for="privacy" class="inputLabel">Privacidad:<br></label>
-                            <select disabled name="privacy" class="newEvent--form--input">
+                            <select disabled name="privacy" id="privacy" class="newEvent--form--input">
                                 <option value="public">Público</option>
                                 <option value="private">Privado</option>
                             </select>
                         </div>
                         <div class="newEvent--form--inscriptionDate--inputs--dateEnd">
                             <label for="dateEnd" class="inputLabel">Fecha de fin:<br></label>
-                            <input required type="date" class="newEvent--form--input" name="inscriptionDateEnd">
+                            <input required type="date" id="dateEnd" class="newEvent--form--input" name="inscriptionDateEnd" value="2023-12-01">
                         </div>
                         <div class="newEvent--form--inscriptionDate--inputs--hourEnd">
                             <label for="hourEnd" class="inputLabel">Hora de fin:<br></label>
-                            <input required type="time" class="newEvent--form--input" name="inscriptionHourEnd">
+                            <input required type="time" id="hourEnd" class="newEvent--form--input" name="inscriptionHourEnd" value="18:00">
                         </div>
                         <div class="newEvent--cancellBtn">
                             <a href="javascript:history.back(-1);"><div class="newEvent--cancellBtn--content">Cancelar</div></a>
                         </div>
                         <div class="newEvent--createBtn">
-                            <a href="createNewEvent"><div class="newEvent--createBtn--content">Unirse</div></a>
+                            <button class="newEvent--createBtn--content">Crear</button>
                         </div>
                 </div>
             </form>
         </div>
+        {% if errCode != null %}
+        <div class="errCard">
+            <div class="errCard--img"><img src="views/img/errImg.png" alt=""></div>
+            <div class="errCard--error">Error</div>
+            {% if errCode == "wrongeventDate" %}
+                <div class="errCard--errorMsg">La fecha de fin del evento no puede ser anterior a la de inicio</div>
+            {% elseif errCode == "wrongInscriptionDate" %}
+                <div class="errCard--errorMsg">La fecha de fin de la inscripcion al evento no puede ser anterior a la de inicio</div>
+            {% elseif errCode == "negativeSlots" %}
+                <div class="errCard--errorMsg">Las plazas del evento no pueden ser negativas</div>
+            {% endif %}
+            
+            <div class="errCard--tryAgainBtn"><a href="newEvent">Volver a intentar</a></div>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}

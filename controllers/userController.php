@@ -89,7 +89,7 @@
             $user->email = $_POST["email"];
             $user->password = $password;
             $user->bornDate = $bornDate;
-            $user->profilePic = $_SESSION['rootPath']."/img/profilePics/defaultProfilePic.jpg";
+            $user->profilePic = "/img/profilePics/defaultProfilePic.jpg";
             $user->userStatus = "Active";
 
             // Guardo el usuario en la base de datos
@@ -181,7 +181,7 @@
             $user = unserialize($_SESSION["user"]);
 
             User_Join_Event::joinEvent($user->userId, $_GET["eventId"]);
-            redireccion("/MeetoPlay/main");
+            redireccion($_SERVER['HTTP_REFERER']);
         }
 
         /**
@@ -192,6 +192,6 @@
             $user = unserialize($_SESSION["user"]);
 
             User_Join_Event::unJoinEvent($user->userId, $_GET["eventId"]);
-            redireccion("/MeetoPlay/main");
+            redireccion($_SERVER['HTTP_REFERER']);
     }
 }

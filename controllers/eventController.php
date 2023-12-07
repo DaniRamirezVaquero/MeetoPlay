@@ -41,8 +41,9 @@ require_once $_SESSION['rootPath']."/library/extra_functs.php";
         public function showCreateEvent() {
 
             $baseTemplateData = mainController::prepareBaseTemplateData();
+            $errCode = $_GET["errCode"] ?? null;
 
-            $this->render("main/createEvent.twig", ["baseTemplateData" => $baseTemplateData]);
+            $this->render("main/createEvent.twig", ["baseTemplateData" => $baseTemplateData, "errCode" => $errCode]);
         }
 
     /**
@@ -90,48 +91,45 @@ require_once $_SESSION['rootPath']."/library/extra_functs.php";
      */
     public function createNewEvent(){
 
-        //Compruebo que los campos requeridos no estén vacíos
-        if (empty($_POST["eventTitle"]) || empty($_POST["eventPlatform"]) || empty($_POST["eventGame"]) || empty($_POST["eventGameMode"]) || empty($_POST["dateBegin"]) || empty($_POST["hourBegin"]) || empty($_POST["dateEnd"]) || empty($_POST["hourEnd"]) || empty($_POST["inscriptionDateBegin"]) || empty($_POST["inscriptionHourBegin"]) || empty($_POST["slots"]) || empty($_POST["inscriptionDateEnd"]) || empty($_POST["inscriptionHourEnd"])) {
-            redireccion("createEvent?errCode=voidInput"); // Redirijo a la página de creación de evento con mensaje de error
-        }
-
         //Compruebo que la fecha de inicio no sea mayor que la fecha de fin (evento)
         if ($_POST["dateBegin"] > $_POST["dateEnd"]) {
-            redireccion("createEvent?errCode=wrongeventDate"); // Redirijo a la página de creación de evento con mensaje de error
+            redireccion("newEvent?errCode=wrongeventDate"); // Redirijo a la página de creación de evento con mensaje de error
         }
 
         //Compruebo que la fecha de inicio no sea mayor que la fecha de fin (inscripcion)
         if ($_POST["inscriptionDateBegin"] > $_POST["inscriptionDateEnd"]) {
-            redireccion("createEvent?errCode=wrongInscriptionDate"); // Redirijo a la página de creación de evento con mensaje de error
+            redireccion("newEvent?errCode=wrongInscriptionDate"); // Redirijo a la página de creación de evento con mensaje de error
         }
 
         //Compruebo que las plazas no sean negativas
         if ($_POST["slots"] < 0) {
-            redireccion("createEvent?errCode=negativeSlots"); // Redirijo a la página de creación de evento con mensaje de error
+            redireccion("newEvent?errCode=negativeSlots"); // Redirijo a la página de creación de evento con mensaje de error
         }
 
         //Compruebo que el juego existe en la base de datos
         if (!gameController::checkGame($_POST["eventGame"])) {
-            redireccion("createEvent?errCode=gameNotFound"); // Redirijo a la página de creación de evento con mensaje de error
+            redireccion("newEvent?errCode=gameNotFound"); // Redirijo a la página de creación de evento con mensaje de error
         }
 
         //Si todos los campos de los requisitos están vacíos, el evento no tiene requisitos
         if ($_POST["minLvl"]==null && $_POST["maxLvl"]==null && $_POST["minRank"]==null && $_POST["maxRank"]==null){
             $eventRequirementId = null;
-        }
-        //Creo los requisitos del evento
+        } else {
+                    //Creo los requisitos del evento
         $eventRequirement = eventRequirement::createEventRequirement($_POST["minLvl"], $_POST["maxLvl"], $_POST["minRank"], $_POST["maxRank"]);
 
         //Cogemos el id del eventoRequirement
         $eventRequirementId = $eventRequirement->eventRequirementId;
+        }
+
+
 
         //Cogemos el id del juego
         $gameId = gameController::getGameIdByName($_POST["eventGame"]);
 
-        //TODO: Comprobar que funciona??
-        $event = event::createEvent
+        event::createEvent
         (
-                $_SESSION["user"]->userId,
+                unserialize($_SESSION["user"])->userId,
                 $_POST["eventTitle"], $_POST["eventPlatform"], 
                 $gameId,  $_POST["eventGameMode"], 
                 $_POST["dateBegin"],  $_POST["hourBegin"], 
@@ -140,5 +138,7 @@ require_once $_SESSION['rootPath']."/library/extra_functs.php";
                 $_POST["inscriptionDateEnd"], $_POST["inscriptionHourEnd"],
                 $_POST["slots"], $eventRequirementId
             );
+
+        redireccion("main");
     }
 }

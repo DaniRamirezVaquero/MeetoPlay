@@ -203,6 +203,10 @@ class event
         // Establezco conexión con la base de datos
         $db = Connection::getConnection();
 
+        if ($eventRequirementId == null) {
+            $eventRequirementId = "NULL";
+        }
+
         // Insertamos el evento en la base de datos
         $db->query("INSERT INTO event 
             ( eventTitle, gameId, gameMode, platform, eventOwnerId, dateBegin, dateEnd, hourBegin, hourEnd, eventRequirementId, slots, dateInscriptionBegin, dateInscriptionEnd, hourInscriptionBegin, hourInscriptionEnd) 
