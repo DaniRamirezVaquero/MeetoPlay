@@ -130,56 +130,5 @@ require_once $_SESSION['rootPath']."/library/extra_functs.php";
                 $_POST["inscriptionDateEnd"], $_POST["inscriptionHourEnd"],
                 $_POST["slots"], $eventRequirementId
             );
-
-        redireccion("main");
-    }
-
-    /**
-     * Devuelve los eventos de un usuario
-     * @return array
-     */
-    public static function getUserEvents($userId): array {
-        $events = Event::getAllEventsByUserId($userId); // Cogemos todos los eventos de los usuarios seguidos por el usuario logeado
-
-        //Antes de enviar events formateo la hora y la fecha
-        formatEventsDateTime($events);
-
-        //Cojo todos los eventRequirement de los eventos
-        $eventsRequirements = [];
-        foreach ($events as $event) {
-            if ($event->eventRequirementId != null) {
-                array_push($eventsRequirements, eventRequirement::getEventRequirementById($event->eventRequirementId));
-            }
-        }
-
-        $eventsData = [
-            "events" => $events,
-            "eventsRequirements" => $eventsRequirements,
-        ];
-
-        return $eventsData;
-
-    }
-
-    /**
-     * Devuelve todos los eventos creados por un usuario
-     * @return array
-     */
-    public static function getAllEventsByOwnerId(int $userId): array {
-
-        $events = Event::getEventsByOwnerId($userId); // Cogemos todos los eventos creados por el usuario
-
-        formatEventsDateTime($events);
-
-        return $events;
-    }
-
-    /**
-     * Elimina un evento por su Id
-     * @return
-     */
-    public function deleteEvent() {
-        Event::deleteEventById($_GET["eventId"]);
-        redireccion($_SERVER['HTTP_REFERER']);
     }
 }
