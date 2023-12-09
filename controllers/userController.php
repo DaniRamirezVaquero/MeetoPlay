@@ -41,14 +41,30 @@
         }
 
         /**
-         * Elimina un user de la base de datos
+         * Muestra la configuración 
          * @return
          */
-        public function delete(int $id) {
-            $user = User::getUserById($id);
-            $user->delete();
+        public function showConfig () {
+
+            $baseTemplateData = mainController::prepareBaseTemplateData();
+
+            $this->render("user/config.twig", ["baseTemplateData" => $baseTemplateData]);
         }
 
+        /**
+         * Muestra el perfil de un usuario
+         * @return
+         */
+        public function showUserProfile () {
+
+            $baseTemplateData = mainController::prepareBaseTemplateData();
+
+            $userEvents = eventController::getAllEventsByOwnerId($_GET["userId"]);
+            $user = User::getUserById($_GET["userId"]);
+
+            $this->render("user/profile.twig", ["baseTemplateData" => $baseTemplateData, "userEvents" => $userEvents, "user" => $user]);
+
+        }
 
         /**
          * Registra a un usuario
@@ -89,7 +105,7 @@
             $user->email = $_POST["email"];
             $user->password = $password;
             $user->bornDate = $bornDate;
-            $user->profilePic = $_SESSION['rootPath']."/img/profilePics/defaultProfilePic.jpg";
+            $user->profilePic = "/img/profilePics/defaultProfilePic.jpg";
             $user->userStatus = "Active";
 
             // Guardo el usuario en la base de datos
@@ -154,17 +170,6 @@
         }
 
         /**
-         * Muestra la configuración 
-         * @return
-         */
-        public function showConfig () {
-
-            $baseTemplateData = mainController::prepareBaseTemplateData();
-
-            $this->render("user/config.twig", ["baseTemplateData" => $baseTemplateData]);
-        }
-
-        /**
          * Cierra la sesión del user
          * @return
          */
@@ -181,7 +186,7 @@
             $user = unserialize($_SESSION["user"]);
 
             User_Join_Event::joinEvent($user->userId, $_GET["eventId"]);
-            redireccion("/MeetoPlay/main");
+            redireccion($_SERVER['HTTP_REFERER']); //Recarga la misma página de la que viene
         }
 
         /**
@@ -192,6 +197,6 @@
             $user = unserialize($_SESSION["user"]);
 
             User_Join_Event::unJoinEvent($user->userId, $_GET["eventId"]);
-            redireccion("/MeetoPlay/main");
+            redireccion($_SERVER['HTTP_REFERER']); //Recarga la misma página de la que viene
     }
 }

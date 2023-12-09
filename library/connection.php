@@ -2,8 +2,6 @@
 
     require_once $_SESSION['rootPath']."/library/extra_functs.php";
 
-    //TODO: Cambiar a PDO
-
     class Connection {
         
         private static ?Connection $instance = null; // '?Connection' indica que puede ser null
@@ -20,9 +18,9 @@
          */
         private function __construct() { // El constructor se hace privado para que no se puedan crear instancias de la clase
             try {
-                $dsn = "mysql:host=db;dbname=MeetoPlayDB";
-                $username = "root";
-                $password = "";
+                $dsn = "mysql:host=meetoplaydb.cgtrldpincxg.us-east-1.rds.amazonaws.com;dbname=MeetoPlayDB";
+                $username = "admin";
+                $password = "adminadmin";
 
                 $this->db = new PDO($dsn, $username, $password);
             } catch (PDOException $exp) {

@@ -5,18 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MeetoPlay</title>
-  <link href="favicon.ico" rel="icon" type="image/x-icon">
-  <link rel="stylesheet" href="./views/css/baseTemplateStyles.css">
-  <link rel="stylesheet" href="./views/css/eventsFeedStyles.css">
-  <link rel="stylesheet" href="./views/css/configStyles.css">
-  <link rel="stylesheet" href="./views/css/createEventStyles.css">
-  <script defer src="./views/js/script.js"></script>
+  <link href="../favicon.ico" rel="icon" type="image/x-icon">
+  <link rel="stylesheet" href="../views/css/baseTemplateStyles.css">
+  <link rel="stylesheet" href="../views/css/eventsFeedStyles.css">
+  <link rel="stylesheet" href="../views/css/configStyles.css">
+  <link rel="stylesheet" href="../views/css/createEventStyles.css">
+  <link rel="stylesheet" href="../views/css/profileTemplate.css">
+  {% block script %}{% endblock %}
 </head>
 
 <body>
-
-  <!-- En la plantilla base solo incluimos el html que es generico a todas las plantillas que heredan de ella-->
-
   <div class="Background">
     <div class="gradientBg">
       <div class="MeetoPlay">MeetoPlay</div>
@@ -25,7 +23,7 @@
         <div class="pinnedChats--Bg">
           <div class="pinnedChats--groupHeader">
             <div class="pinnedChats--dropDownBtn"><button><img class="dropDownArrow"
-                  src="./views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
+                  src="../views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
             </div>
             <div class="pinnedChats--groupName">Chats Fijados</div>
           </div>
@@ -33,7 +31,7 @@
             {% if baseTemplateData.followedUsers != null %}
             <div class="pinnedChat1">
               <div class="pinnedChat1Bg">
-                <div class="pinnedChat1--profPic"><img src="{{ baseTemplateData.followedUsers[0].profilePic|raw }}"
+                <div class="pinnedChat1--profPic"><img src="../{{ baseTemplateData.followedUsers[0].profilePic|raw }}"
                     alt="profilePic"></div>
                 <div class="pinnedChat1--userName">{{ baseTemplateData.followedUsers[0].userName }}</div>
                 <div class="pinnedChat1--userStatus">
@@ -46,12 +44,12 @@
                   {% endif %}
                   <div class="pinnedChat1--userStatusT">{{ baseTemplateData.followedUsers[0].userStatus }}</div>
                 </div>
-                <div class="pinnedChat1--chatIcon"><img src="./views/img/chatIconBPW.png" alt="chatIcon"></div>
+                <div class="pinnedChat1--chatIcon"><img src="../views/img/chatIconBPW.png" alt="chatIcon"></div>
               </div>
             </div>
             <div class="pinnedChat2">
               <div class="pinnedChat2Bg">
-                <div class="pinnedChat2--profPic"><img src="{{ baseTemplateData.followedUsers[1].profilePic|raw }}"
+                <div class="pinnedChat2--profPic"><img src="../{{ baseTemplateData.followedUsers[1].profilePic|raw }}"
                     alt="profilePic"></div>
                 <div class="pinnedChat2--userName">{{ baseTemplateData.followedUsers[1].userName }}</div>
                 <div class="pinnedChat2--userStatus">
@@ -64,7 +62,7 @@
                   {% endif %}
                   <div class="pinnedChat2--userStatusT">{{ baseTemplateData.followedUsers[1].userStatus }}</div>
                 </div>
-                <div class="pinnedChat2--chatIcon"><img src="./views/img/chatIconBPW.png" alt="chatIcon"></div>
+                <div class="pinnedChat2--chatIcon"><img src="../views/img/chatIconBPW.png" alt="chatIcon"></div>
               </div>
             </div>
             {% endif %}
@@ -74,7 +72,7 @@
           <div class="chats--groupHeader">
             <div class="chats--dropDownBtn">
               <button>
-                <img class="dropDownArrow" src="./views/img/dropDownArrowW.png" alt="dropdownIcon">
+                <img class="dropDownArrow" src="../views/img/dropDownArrowW.png" alt="dropdownIcon">
               </button>
             </div>
             <div class="chats--groupName">Chats</div>
@@ -84,7 +82,7 @@
           <div class="eventsChats--groupHeader">
             <div class="eventsChats--dropDownBtn">
               <button>
-                <img class="dropDownArrow" src="./views/img/dropDownArrowW.png" alt="dropdownIcon">
+                <img class="dropDownArrow" src="../views/img/dropDownArrowW.png" alt="dropdownIcon">
               </button>
             </div>
             <div class="eventsChats--groupName">Eventos</div>
@@ -104,23 +102,25 @@
         <div class="bfActivityCard--Bg">
           <div class="bfActivityCard--groupHeader">
             <div class="bfActivityCard--dropDownBtn"><button><img class="dropDownArrow"
-                  src="./views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
+                  src="../views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
             </div>
             <div class="bfActivityCard--groupName">Mejores amigos</div>
           </div>
+          <div class="mockUpImg"><img src="../views/img/bfriendsActivityImg.png" alt="mockUpImg"></div>
         </div>
         <div class="friendsActivityCard--Bg">
           <div class="friendsActivityCard--groupHeader">
             <div class="friendsActivityCard--dropDownBtn"><button><img class="dropDownArrow"
-                  src="./views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
+                  src="../views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
             </div>
             <div class="friendsActivityCard--groupName">Amigos</div>
           </div>
+          <div class="mockUpImg"><img src="../views/img/friendsActivityImg.png" alt="mockUpImg"></div>
         </div>
         <div class="followedActivityCard--Bg">
           <div class="followedActivityCard--groupHeader">
             <div class="followedActivityCard--dropDownBtn"><button><img class="dropDownArrow"
-                  src="./views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
+                  src="../views/img/dropDownArrowW.png" alt="dropdownIcon"></button>
             </div>
             <div class="followedActivityCard--groupName">Seguidos</div>
           </div>
@@ -130,33 +130,35 @@
       {% block profile %}
       <div class="profileCard--Bg">
         <div class="userdata">
-          <div class="userdata--userProfPic">
-            <img src="{{ baseTemplateData.logedUser.profilePic }}" alt="userProfilePic">
-          </div>
-          <div class="userdata--userName">{{ baseTemplateData.logedUser.userName }}</div>
-          <div class="userdata--userStatus">
-            {% if baseTemplateData.logedUser.userStatus == "Active" %}
-            <div class="userdata--userStatusActive"></div>
-            {% elseif baseTemplateData.logedUser.userStatus == "DND" %}
-            <div class="userdata--userStatusDND"></div>
-            {% else %}
-            <div class="userdata--userStatusAFK"></div>
-            {% endif %}
-            <div class="userdata--userStatusT">{{ baseTemplateData.logedUser.userStatus }}</div>
-          </div>
+        <a href="userProfile/{{ baseTemplateData.logedUser.userId }}" class="userdata--userProfile">
+            <div class="userdata--userProfPic">
+              <img src="../{{ baseTemplateData.logedUser.profilePic }}" alt="userProfilePic">
+            </div>
+            <div class="userdata--userName">{{ baseTemplateData.logedUser.userName }}</div>
+            <div class="userdata--userStatus">
+              {% if baseTemplateData.logedUser.userStatus == "Active" %}
+              <div class="userdata--userStatusActive"></div>
+              {% elseif baseTemplateData.logedUser.userStatus == "DND" %}
+              <div class="userdata--userStatusDND"></div>
+              {% else %}
+              <div class="userdata--userStatusAFK"></div>
+              {% endif %}
+              <div class="userdata--userStatusT">{{ baseTemplateData.logedUser.userStatus }}</div>
+            </div>
+        </a>
         </div>
         <div class="btns">
           <div class="btn--newEvent">
-            <a href="newEvent"><img src="./views/img/newEvent.png" alt="newEventIcon"></a>
+            <a href="newEvent"><img src="../views/img/newEvent.png" alt="newEventIcon"></a>
           </div>
           <div class="btn--config">
-            <a href="config"><img src="./views/img/gear.png" alt="configIcon"></a>
+            <a href="config"><img src="../views/img/gear.png" alt="configIcon"></a>
           </div>
         </div>
         <div class="playingIn">Jugando en PC</div>
         <div class="playingdata">
           <div class="playingdata--gameLogo">
-            <img src="img/gameLogos/lolLogo.png" alt="gameLogo">
+            <img src="../img/gameLogos/lolLogo.png" alt="gameLogo">
           </div>
           <div class="playingdata--gameName">{{ baseTemplateData.games[0].gameName }}</div>
           <div class="playingdata--gameMode">Ranked 5 vs 5</div>

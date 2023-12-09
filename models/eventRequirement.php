@@ -46,7 +46,7 @@
          * @param int $minLvl
          * @return eventRequirement
          */
-        public static function createEventRequirement(string $maxRank, string $minRank, int $maxLvl, int $minLvl): int {
+        public static function createEventRequirement(?string $maxRank, ?string $minRank, ?string $maxLvl, ?string $minLvl): int{
 
             // Establezco conexión con la base de datos
             $db = Connection::getConnection();

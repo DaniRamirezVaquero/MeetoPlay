@@ -6,13 +6,11 @@
 
 }
 
-.newEvent--bg{
+.newEvent--bg {
     background-color: #262626;
     border-radius: 10px;
     width: 100%;
     height: 100%;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
     padding: 40px;
     box-sizing: border-box;
 }
@@ -23,14 +21,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 0px 25px 65px 65px 25px 65px 65px 25px 65px 72px;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: start;
     grid-gap: 25px;
     box-sizing: border-box;
 }
 
-.newEvent--form--title{
+.newEvent--form--title {
     grid-column: 1/5;
     grid-row: 1/2;
     text-align: center;
@@ -41,7 +39,7 @@
     color: whitesmoke;
 }
 
-.rowtitle{
+.rowtitle {
     text-align: left;
     font-size: 26px;
     color: whitesmoke;
@@ -72,7 +70,7 @@
 }
 
 .newEvent--form--what--inputs--eventGame {
-    grid-column: 1/3;
+    grid-column: 1/2;
 }
 
 .newEvent--form--what--inputs--eventGameMode {
@@ -87,7 +85,7 @@
     grid-column: 3/5;
 }
 
-.newEvent--form--inscriptionDate{
+.newEvent--form--inscriptionDate {
     grid-column: 1/3;
 }
 
@@ -95,7 +93,7 @@
     grid-column: 3/5;
 }
 
-.newEvent--createBtn{
+.newEvent--createBtn {
     width: 100%;
     height: 50px;
     border-radius: 17.5px;
@@ -113,7 +111,7 @@
     box-sizing: border-box;
 }
 
-.newEvent--createBtn--content{
+.newEvent--createBtn--content {
     width: 100%;
     height: 100%;
     border-radius: 15px;
@@ -129,7 +127,7 @@
 }
 
 
-.newEvent--cancellBtn{
+.newEvent--cancellBtn {
     width: 100%;
     height: 50px;
     border-radius: 17.5px;
@@ -147,7 +145,7 @@
     box-sizing: border-box;
 }
 
-.newEvent--cancellBtn--content{
+.newEvent--cancellBtn--content {
     width: 100%;
     height: 100%;
     border-radius: 15px;
@@ -162,16 +160,114 @@
     align-items: center;
 }
 
-.newEvent--createBtn a, .newEvent--cancellBtn a {
+.newEvent--createBtn button,
+.newEvent--cancellBtn a {
     text-decoration: none;
     color: whitesmoke;
     width: 100%;
     height: 100%;
+    font-family: 'Kanit';
 }
 
-.newEvent--createBtn, .newEvent--cancellBtn {
+.newEvent--createBtn,
+.newEvent--cancellBtn {
     align-self: flex-end;
     justify-self: center;
 }
 
+.errCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 400px;
+    height: 300px;
+    left: 205px;
+    top: 300px;
+    position: absolute;
+    border-radius: 15px;
+    border: 2px solid #EC2828;
 
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.6px);
+    -webkit-backdrop-filter: blur(10.6px);
+
+    box-sizing: border-box;
+    text-align: center;
+    padding: 35px;
+
+}
+
+.errCard--img img {
+    width: 75px;
+    height: 75px;
+}
+
+.errCard--error {
+    color: #EC2828;
+    font-weight: 500;
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.errCard--tryAgainBtn {
+    width: 160px;
+    height: 40px;
+    background-color: #EC2828;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight: 500;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.errCard--tryAgainBtn a {
+    color: white;
+    text-decoration: none;
+}
+
+.errCard--errorMsg {
+    color: #262626;
+    font-weight: 500;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* #eventGame {
+    width: 215px;
+} */
+
+.newEvent--from--inputs--eventGame--select {
+    width: 100%;
+    height: 100%;
+    background-color: #363636;
+    border-radius: 5px;
+    border: 1px solid whitesmoke;
+    padding: 5px 10px 5px 10px;
+    color: whitesmoke;
+    font-size: 18px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.newEvent--form--what--inputs--eventPlatform select {
+    width: 100%;
+    height: 100%;
+    background-color: #363636;
+    border-radius: 5px;
+    border: 1px solid whitesmoke;
+    padding: 5px 10px 5px 10px;
+    color: whitesmoke;
+    font-size: 18px;
+    box-sizing: border-box;
+    cursor: pointer;
+}

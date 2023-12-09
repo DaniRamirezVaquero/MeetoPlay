@@ -1,4 +1,7 @@
 {% extends "baseTemplate.twig" %}
+{% block script %}
+    <script defer src="./views/js/arrow-rotate-script.js"></script>
+{% endblock %}
 
 {% block mainContent %}
     <div class="scrollFeed" id="scroll">
@@ -41,7 +44,7 @@
                 </div>
                 <div class="eventCard--owner">
                     <div class="eventCard--owner--proPic"><img src="{{ baseTemplateData.users[event.eventOwnerId-1].profilePic|raw }}" alt="eventOwnerprofPic"></div>
-                    <div class="eventCard--owner--userName">Evento creado por: {{ eventsData.users[event.eventOwnerId-1].userName }} </div>
+                    <div class="eventCard--owner--userName">Evento creado por:&nbsp; {{ baseTemplateData.users[event.eventOwnerId-1].userName }} </div>
                 </div>
                 <div class="eventCard--participants">
                     <div class="eventCard--participants--title">Participantes:</div>

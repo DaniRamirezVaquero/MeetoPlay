@@ -203,10 +203,46 @@ class event
         // Establezco conexión con la base de datos
         $db = Connection::getConnection();
 
+        if ($eventRequirementId == null) {
+            $eventRequirementId = "NULL";
+        }
+
         // Insertamos el evento en la base de datos
         $db->query("INSERT INTO event 
             ( eventTitle, gameId, gameMode, platform, eventOwnerId, dateBegin, dateEnd, hourBegin, hourEnd, eventRequirementId, slots, dateInscriptionBegin, dateInscriptionEnd, hourInscriptionBegin, hourInscriptionEnd) 
             VALUES 
             ('$eventTitle', $gameId, '$gameMode', '$platform', $userId, '$dateBegin', '$dateEnd', '$hourBegin', '$hourEnd', $eventRequirementId, $slots, '$dateInscriptionBegin', '$dateInscriptionEnd', '$hourInscriptionBegin' ,'$hourInscriptionEnd');");
+    }
+
+    /**
+     * Devuelve los eventos creados por un usuario
+     * @param int $userId
+     * @return array
+     */
+    public static function getEventsByOwnerId(int $userId): array {
+
+        // Establezco conexión con la base de datos
+        $db = Connection::getConnection();
+
+        // Consulta a la base de datos, cogemos todos los eventos que coinciden con el ID pedido
+        $db->query("SELECT * FROM event WHERE eventOwnerId = $userId;");
+        $events = $db->getAll("Event"); //Devuelve un objeto event
+
+        //Devolvemos los eventos
+        return $events;
+        
+    }
+
+    /**
+     * Elimina un evento
+     * @param int $eventId
+     */
+    public static function deleteEventById(int $eventId) {
+
+        // Establezco conexión con la base de datos
+        $db = Connection::getConnection();
+
+        // Eliminamos el evento de la base de datos
+        $db->query("DELETE FROM event WHERE eventId = $eventId;");
     }
 }

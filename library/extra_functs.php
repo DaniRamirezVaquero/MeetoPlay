@@ -24,3 +24,20 @@ function checkSession ():void {
         redireccion("main");
     }
 }
+
+/**
+ * Formatea la fecha y la hora de un grupo de eventos para que se muestre correctamente
+ * @param array $events
+ * @return array
+ */
+function formatEventsDateTime (array $events):array {
+    foreach ($events as $event) {
+        $event->dateBegin = $event->formatDate($event->dateBegin);
+        $event->dateEnd = $event->formatDate($event->dateEnd);
+        $event->hourBegin = $event->formatHour($event->hourBegin);
+        $event->hourEnd = $event->formatHour($event->hourEnd);
+        $event->dateInscriptionEnd = $event->formatDate($event->dateInscriptionEnd);
+        $event->hourInscriptionEnd = $event->formatHour($event->hourInscriptionEnd);
+    }
+    return $events;
+}
