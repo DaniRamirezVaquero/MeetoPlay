@@ -7,27 +7,30 @@
 {% block mainContent %}
     <div class="newEvent--container">
         <div class="newEvent--bg">
-            <form action="index.php" method="POST" id="form">
+            <form action="/index.php" method="POST" id="form">
 
                 <input type="hidden" name="m" value="event"/>
-                <input type="hidden" name="f" value="createNewEvent"/>
+                <input type="hidden" name="f" value="editEvent"/>
+                <input type="hidden" name="eventId" value="{{ event.eventId }}"/>
 
                 <div class="newEvent--form--container">
                     <div class="newEvent--form--title title">Nuevo evento</div>
                     <div class="newEvent--form--what rowtitle">¿A qué jugamos?</div>
                         <div class="newEvent--form--what--inputs--eventTitle">
                             <label for="eventTitle" class="inputLabel">Título del evento:<br> </label>
-                            <input required type="text" id="eventTitle" class="newEvent--form--input" name="eventTitle" value="Miancrah">
+                            <input required type="text" id="eventTitle" class="newEvent--form--input" name="eventTitle" value="{{ event.eventTitle }}">
                         </div>
                         <div class="newEvent--form--what--inputs--eventPlatform">
-                            <label for="eventPlatForm" class="inputLabel">Plataforma:<br></label>
-                            <select name="eventPlatform" id="platformlist">                            
+                            <label for="platformlist" class="inputLabel">Plataforma:<br></label>
+                            <select name="eventPlatform" id="platformlist">  
+                                <option value="{{ event.platform }}">{{ event.platform }}</option>                          
                                 <option value="PC">PC</option>
                                 <option value="Xbox">Xbox</option>
                                 <option value="PlayStation">PlayStation</option>
                                 <option value="Nintendo">Nintendo</option>
                                 <option value="Mobile">Mobile</option>
-                                <option value="Multiplataforma">Multiplataforma</option></select>
+                                <option value="Multiplataforma">Multiplataforma</option>
+                            </select>
                         </div>
                         <div class="newEvent--form--what--inputs--eventGame">
                             <label for="eventGame" class="inputLabel">Buscador:<br></label>
@@ -35,22 +38,24 @@
                         </div>
                         <div class="newEventform--what--inputs--eventGame--select">
                             <label for="eventGame" class="inputLabel">Juego:<br></label>
-                            <select required id="gameList" class="newEvent--from--inputs--eventGame--select" name="eventGame"></select>
+                            <select required id="gameList" class="newEvent--from--inputs--eventGame--select" name="eventGame">
+                                <option value="{{ game.gameName }}">{{ game.gameName }}</option>
+                            </select>
                         </div>
                         
                         <div class="newEvent--form--what--inputs--eventGameMode">
                             <label for="eventGameMode" class="inputLabel">Modo de juego:<br></label>
-                            <input required type="text" id="eventGameMode" class="newEvent--form--input" name="eventGameMode" value="Survival">
+                            <input required type="text" id="eventGameMode" class="newEvent--form--input" name="eventGameMode" value="{{ event.gameMode }}">
                         </div>
                         <div class="newEvent--form--when rowtitle">¿Cuándo?</div>
                         <div class="newEvent--form--requirments rowtitle">Requesitos</div>
                         <div class="newEvent--form--when--inputs--dateBegin">
                             <label for="dateBegin" class="inputLabel">Fecha de inicio:<br></label>
-                            <input required type="date" id="dateBegin" class="newEvent--form--input" name="dateBegin" value="2023-12-01">
+                            <input required type="date" id="dateBegin" class="newEvent--form--input" name="dateBegin" value="{{ event.dateBegin }}">
                         </div>
                         <div class="newEvent--form--when--inputs--hourBegin">
                             <label for="hourBegin" class="inputLabel">Hora de inicio:<br></label>
-                            <input required type="time" id="hourBegin" class="newEvent--form--input" name="hourBegin" value="19:00">
+                            <input required type="time" id="hourBegin" class="newEvent--form--input" name="hourBegin" value="{{ event.hourBegin }}">
                         </div>
                         <div class="newEvent--form--requirments--inputs--minLvl">
                             <label for="minLvl" class="inputLabel">Nivel mínimo:<br></label>
@@ -62,33 +67,33 @@
                         </div>
                         <div class="newEvent--form--when--inputs--dateEnd">
                             <label for="dateEnd" class="inputLabel">Fecha de fin:<br></label>
-                            <input required type="date" id="dateEnd" class="newEvent--form--input" name="dateEnd" value="2023-12-02">
+                            <input required type="date" id="dateEnd" class="newEvent--form--input" name="dateEnd" value="{{ event.dateEnd }}">
                         </div>
                         <div class="newEvent--form--when--inputs--hourEnd">
                             <label for="hourEnd" class="inputLabel">Hora de fin:<br></label>
-                            <input required type="time" id="hourEnd" class="newEvent--form--input" name="hourEnd" value="19:00">
+                            <input required type="time" id="hourEnd" class="newEvent--form--input" name="hourEnd" value="{{ event.hourEnd }}">
                         </div>
                         <div class="newEvent--form--requirments--inputs--minRank">
                             <label for="minRank" class="inputLabel">Rango mínimo:<br></label>
-                            <input type="text" id="minRank" class="newEvent--form--input" name="minRank" placeholder="Opcional">
+                            <input type="text" id="minRank" class="newEvent--form--input" name="minRank" placeholder="Opcional" value="{{ eventRequirement.minRank }}">
                         </div>
                         <div class="newEvent--form--requirments--inputs--maxRank">
                             <label for="maxRank" class="inputLabel">Rango máximo:<br></label>
-                            <input type="text" id="maxRank" class="newEvent--form--input" name="maxRank" placeholder="Opcional">
+                            <input type="text" id="maxRank" class="newEvent--form--input" name="maxRank" placeholder="Opcional" value="{{ eventRequirement.maxRank }}">
                         </div>
                         <div class="newEvent--form--inscriptionDate rowtitle">Plazo de inscripción</div>
                         <div class="newEvent--form--who rowtitle">¿Quíenes?</div>
                         <div class="newEvent--form--inscriptionDate--inputs--dateBegin">
                             <label for="inscriptionDateBegin" class="inputLabel">Fecha de inicio:<br></label>
-                            <input required type="date" id="inscriptionDateBegin" class="newEvent--form--input" name="inscriptionDateBegin" value="2023-12-01">
+                            <input required type="date" id="inscriptionDateBegin" class="newEvent--form--input" name="inscriptionDateBegin" value="{{ event.dateInscriptionBegin }}">
                         </div>
                         <div class="newEvent--form--inscriptionDate--inputs--hourBegin">
                             <label for="inscriptionHourBegin" class="inputLabel">Hora de inicio:<br></label>
-                            <input required type="time" id="inscriptionHourBegin" class="newEvent--form--input" name="inscriptionHourBegin" value="10:00">
+                            <input required type="time" id="inscriptionHourBegin" class="newEvent--form--input" name="inscriptionHourBegin" value="{{ event.hourInscriptionBegin }}">
                         </div>
                         <div class="newEvent--form--who-inputs--slots">
                             <label for="slots" class="inputLabel">Plazas:<br></label>
-                            <input required type="text" id="slots" class="newEvent--form--input" name="slots" value="5">
+                            <input required type="text" id="slots" class="newEvent--form--input" name="slots" value="{{ event.slots }}">
                         </div>
                         <div class="newEvent--form--who-inputs--privacy">
                             <label for="privacy" class="inputLabel">Privacidad:<br></label>
@@ -99,17 +104,17 @@
                         </div>
                         <div class="newEvent--form--inscriptionDate--inputs--dateEnd">
                             <label for="dateEnd" class="inputLabel">Fecha de fin:<br></label>
-                            <input required type="date" id="dateEnd" class="newEvent--form--input" name="inscriptionDateEnd" value="2023-12-01">
+                            <input required type="date" id="dateEnd" class="newEvent--form--input" name="inscriptionDateEnd" value="{{ event.dateInscriptionEnd }}">
                         </div>
                         <div class="newEvent--form--inscriptionDate--inputs--hourEnd">
                             <label for="hourEnd" class="inputLabel">Hora de fin:<br></label>
-                            <input required type="time" id="hourEnd" class="newEvent--form--input" name="inscriptionHourEnd" value="18:00">
+                            <input required type="time" id="hourEnd" class="newEvent--form--input" name="inscriptionHourEnd" value="{{ event.hourInscriptionEnd }}">
                         </div>
                         <div class="newEvent--cancellBtn">
                             <a href="javascript:history.back(-1);"><div class="newEvent--cancellBtn--content">Cancelar</div></a>
                         </div>
                         <div class="newEvent--createBtn">
-                            <button class="newEvent--createBtn--content">Crear</button>
+                            <button class="newEvent--createBtn--content">Editar</button>
                         </div>
                 </div>
             </form>

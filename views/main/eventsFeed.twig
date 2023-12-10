@@ -1,7 +1,11 @@
 {% extends "baseTemplate.twig" %}
+{% block script %}
+    <script defer src="./views/js/arrow-rotate-script.js"></script>
+{% endblock %}
 
 {% block mainContent %}
     <div class="scrollFeed" id="scroll">
+    {% set eventCount=0 %}
         {% for event in eventsData.events %}
             <div class="eventCard">
                 <div class="eventCard--dropDownBtn" id="dropDownArrow">
@@ -23,17 +27,17 @@
                 <div class="eventCard--requirements">
                     <div class="eventCard--requirements--title">Requesitos de inscripción:</div>
                 {% if event.eventRequirementId != null %}
-                    {% if eventsData.eventsRequirements[(event.eventRequirementId-1)].minLvl != null %}
-                        <div class="eventCard--requirement--minlvl">Nivel mínimo: &nbsp; {{ eventsData.eventsRequirements[(event.eventRequirementId)-1].minLvl }}</div>
+                    {% if eventsData.eventsRequirements[eventCount].minLvl != null %}
+                        <div class="eventCard--requirement--minlvl">Nivel mínimo: &nbsp; {{ eventsData.eventsRequirements[eventCount].minLvl }}</div>
                     {% endif %}
-                    {% if eventsData.eventsRequirements[(event.eventRequirementId-1)].maxLvl != null %}
-                        <div class="eventCard--requirement--maxlvl">Nivel máximo: &nbsp; {{ eventsData.eventsRequirements[(event.eventRequirementId)-1].maxLvl }}</div>
+                    {% if eventsData.eventsRequirements[eventCount].maxLvl != null %}
+                        <div class="eventCard--requirement--maxlvl">Nivel máximo: &nbsp; {{ eventsData.eventsRequirements[eventCount].maxLvl }}</div>
                     {% endif %}
-                    {% if eventsData.eventsRequirements[(event.eventRequirementId-1)].minRank != null %}
-                        <div class="eventCard--requirement--minRank">Rango mínimo: &nbsp; {{ eventsData.eventsRequirements[(event.eventRequirementId)-1].minRank }}</div>
+                    {% if eventsData.eventsRequirements[eventCount].minRank != null %}
+                        <div class="eventCard--requirement--minRank">Rango mínimo: &nbsp; {{ eventsData.eventsRequirements[eventCount].minRank }}</div>
                     {% endif %}
-                    {% if eventsData.eventsRequirements[(event.eventRequirementId-1)].maxRank != null %}
-                        <div class="eventCard--requirement--maxlvl">Rango máximo: &nbsp; {{ eventsData.eventsRequirements[(event.eventRequirementId)-1].maxRank }}</div>
+                    {% if eventsData.eventsRequirements[eventCount].maxRank != null %}
+                        <div class="eventCard--requirement--maxlvl">Rango máximo: &nbsp; {{ eventsData.eventsRequirements[eventCount].maxRank }}</div>
                     {% endif %}
                 {% else %}
                     <div class="eventCard--requirements--no">No hay requisitos</div>
@@ -41,14 +45,14 @@
                 </div>
                 <div class="eventCard--owner">
                     <div class="eventCard--owner--proPic"><img src="{{ baseTemplateData.users[event.eventOwnerId-1].profilePic|raw }}" alt="eventOwnerprofPic"></div>
-                    <div class="eventCard--owner--userName">Evento creado por: {{ eventsData.users[event.eventOwnerId-1].userName }} </div>
+                    <div class="eventCard--owner--userName">Evento creado por:&nbsp; {{ baseTemplateData.users[event.eventOwnerId-1].userName }} </div>
                 </div>
                 <div class="eventCard--participants">
                     <div class="eventCard--participants--title">Participantes:</div>
                     <div class="eventCard--participants--list">
                         {% set counter=0 %}
                         {% if event.participants != null %}
-                            {% for participant in eventsData.eventsParticipants[event.eventId-1] %}
+                            {% for participant in eventsData.eventsParticipants[eventCount] %}
                                 {% if counter <= 10 %}
                                     <div class="eventCard--participants--list--participantName">{{ participant }}{{ not loop.last ? ',&nbsp;&nbsp;' : '' }}</div>
                                 {% elseif counter == 11 and not loop.last %}
@@ -70,7 +74,7 @@
                 <div class="eventCard--slots">
                     <div class="eventCard--slots--title">Plazas: &nbsp;</div>
                     <div class="eventCard--slots--slots">
-                        {% set availablesSlots = event.slots - eventsData.eventsParticipants[event.eventId-1]|length %}
+                        {% set availablesSlots = event.slots - eventsData.eventsParticipants[eventCount]|length %}
                         {% set totalSlots = event.slots %}
                         <div class="eventCard--slots--slots--available">{{ availablesSlots }}</div>&nbsp;/&nbsp;<div class="eventCard--slots--slots--total">{{ totalSlots }}</div>
                     </div>
@@ -87,6 +91,7 @@
                     {% endif %}
                 </div>
             </div>
+            {% set eventCount = eventCount + 1 %}
         {% endfor %}
 </div>
 {% endblock %}

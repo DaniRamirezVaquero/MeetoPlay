@@ -5,7 +5,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Kanit', sans-serif;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .Background {
@@ -668,4 +668,11 @@ body {
 .dropDownArrow {
     width: 16px;
     height: 16px;
+}
+
+.mockUpImg IMG{
+
+    width: 345px;
+    margin-top: 45px;
+    margin-left: 10px;
 }
