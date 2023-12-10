@@ -5,3 +5,6 @@ Aquí se desarrollará el proyecto de MeetoPlay para DWES
 
 ## Descripción
 MeetoPlay se trata de una red social donde los usuarios de internet pueden organizar quedadas y conocer a otros usuarios con los que jugar a sus videojuegos favoritos.
+
+## Despliegue
+https://meetoplay.duckdns.org/
