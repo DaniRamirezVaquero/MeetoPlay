@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SESSION['rootPath']."/library/connection.php";
+require_once $_SESSION['rootPath'] . "/library/connection.php";
 
 class User
 {
@@ -15,20 +15,19 @@ class User
 
         public function __construct()
         {
-                
         }
 
         public static function getAllUsers(): array
         {
-                        
-                        // Establezco conexión con la base de datos
-                        $db = Connection::getConnection();
-        
-                        // Consulta a la base de datos, cogemos todos los users
-                        $db->query("SELECT * FROM user;");        
-        
-                        //Devolvemos los users
-                        return $db->getAll("user");
+
+                // Establezco conexión con la base de datos
+                $db = Connection::getConnection();
+
+                // Consulta a la base de datos, cogemos todos los users
+                $db->query("SELECT * FROM user;");
+
+                //Devolvemos los users
+                return $db->getAll("user");
         }
 
         public static function getUserById(int $userId)
@@ -40,9 +39,6 @@ class User
                 // Consulta a la base de datos, cogemos la user que coincide con el ID pedido
                 $db->query("SELECT * FROM user WHERE userId = $userId;");
                 $user = $db->getRow("User"); //Devuelve un objeto user
-
-                // Cierro la conexión con la base de datos
-                $db->close();
 
                 //Devolvemos la user
                 return $user;
@@ -61,11 +57,9 @@ class User
                 // Consulta a la base de datos, borramos el user que coincide con el ID pedido
                 $db->query("DELETE FROM user WHERE userId = $this->userId;");
 
-                // Cierro la conexión con la base de datos
-                $db->close();
         }
 
-        public static function loginUser(string $email, string $password): mixed 
+        public static function loginUser(string $email, string $password): mixed
         {
 
                 // Establezco conexión con la base de datos
@@ -76,9 +70,6 @@ class User
                 // Consulta a la base de datos, cogemos la user que coincide con el email y la contraseña
                 $db->query("SELECT * FROM user WHERE email = '$email' AND password = '$password';");
                 $user = $db->getRow("User"); //Devuelve un objeto user
-
-                // Cierro la conexión con la base de datos
-                $db->close();
 
                 //Devolvemos la user
                 return $user;
@@ -94,25 +85,63 @@ class User
                 $db->query("SELECT * FROM user WHERE email = '$email';");
                 $user = $db->getRow("User"); //Devuelve un objeto user
 
-                // Cierro la conexión con la base de datos
-                $db->close();
-
                 //Devolvemos la user
                 return $user;
         }
 
-        public static function getAllFollowedUsers(int $userId): array {
-                        
+        public static function getAllFollowedUsers(int $userId): array
+        {
+
                 // Establezco conexión con la base de datos
                 $db = Connection::getConnection();
 
                 // Consulta a la base de datos, cogemos todos los usuarios seguidos por el usuario logeado
-                $db->query("SELECT * FROM user WHERE userId IN (SELECT followedId FROM follower_followed WHERE followerId = " . $userId . ");");    
-                $users = $db->getAll("User"); //Devuelve un objeto user
+                $db->query("SELECT * FROM user WHERE userId IN (SELECT followedId FROM follower_followed WHERE followerId = " . $userId . ");");
+                $followedUsers = $db->getAll("User"); //Devuelve array de users
 
                 //Devolvemos los usuarios
-                return $users;                
+
+                return $followedUsers;
         }
+
+        /**
+         * Devuelve todos los seguidores de un usuario
+         * @param int $userId
+         * @return array
+         */
+        public static function getAllFollowers(int $userId): array
+        {
+
+                // Establezco conexión con la base de datos
+                $db = Connection::getConnection();
+
+                // Consulta a la base de datos, cogemos todos los usuarios seguidos por el usuario logeado
+                $db->query("SELECT * FROM user WHERE userId IN (SELECT followedId FROM follower_followed WHERE followedId = " . $userId . ");");
+                $followers = $db->getAll("User"); //Devuelve un array de users
+
+                //Devolvemos los usuarios
+                return $followers;
+        }
+
+        /**
+         * Devuelve los amigos de un usuario (seguidores al que el sigue también)
+         * @param int $userId
+         * @return array
+         */
+        public static function getAllFriends(int $userId): array
+        {
+
+                // Establezco conexión con la base de datos
+                $db = Connection::getConnection();
+
+                // Consulta a la base de datos, cogemos todos los usuarios seguidos por el usuario logeado
+                $db->query("SELECT * FROM user WHERE userId IN (SELECT followerId FROM follower_followed WHERE followedId = " . $userId . ") AND userId IN (SELECT followedId FROM follower_followed WHERE followerId = " . $userId . ");");
+                $friends = $db->getAll("User"); //Devuelve un array de users
+
+                //Devolvemos los usuarios
+                return $friends;
+        }
+
 
         public static function emailExists(string $email): bool
         {
@@ -122,7 +151,7 @@ class User
 
                 // Consulta a la base de datos, cogemos la user que coincide con el email pedido
                 $db->query("SELECT * FROM user WHERE email = '$email';");
-                $user = $db->getRow("User"); //Devuelve un objeto user
+                $user = $db->getRow("User"); //Devuelve un user
 
                 //Devolvemos la user
                 return $user != null;
@@ -146,8 +175,9 @@ class User
          * Guarda un user en la base de datos
          * @return
          */
-        public function save() {
-                        
+        public function save()
+        {
+
                 // Establezco conexión con la base de datos
                 $db = Connection::getConnection();
 

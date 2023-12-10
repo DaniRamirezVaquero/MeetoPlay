@@ -83,4 +83,22 @@ class Game
                 //Devolvemos el juego
                 return $gameId->gameId;
         }
+
+        /**
+         * Busca juegos por su nombre
+         * @param string $gameName
+         * @return array
+         */
+        public static function getGamesNameByName($gameName): array {
+                        
+                        // Establezco conexión con la base de datos
+                        $db = Connection::getConnection();
+        
+                        // Consulta a la base de datos, cogemos el juego que coincide con el ID pedido
+                        $db->query("SELECT * FROM game WHERE gameName LIKE '%$gameName%';");
+                        $gameName = $db->getAll("Game"); //Devuelve un objeto game
+        
+                        //Devolvemos el juego
+                        return $gameName;
+        }
 }

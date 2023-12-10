@@ -203,10 +203,126 @@ class event
         // Establezco conexión con la base de datos
         $db = Connection::getConnection();
 
+        if ($eventRequirementId == null) {
+            $eventRequirementId = "NULL";
+        }
+
         // Insertamos el evento en la base de datos
         $db->query("INSERT INTO event 
             ( eventTitle, gameId, gameMode, platform, eventOwnerId, dateBegin, dateEnd, hourBegin, hourEnd, eventRequirementId, slots, dateInscriptionBegin, dateInscriptionEnd, hourInscriptionBegin, hourInscriptionEnd) 
             VALUES 
             ('$eventTitle', $gameId, '$gameMode', '$platform', $userId, '$dateBegin', '$dateEnd', '$hourBegin', '$hourEnd', $eventRequirementId, $slots, '$dateInscriptionBegin', '$dateInscriptionEnd', '$hourInscriptionBegin' ,'$hourInscriptionEnd');");
+    }
+
+    /**
+     * Actualiza un evento
+     * @param int $eventId
+     * @param string $eventTitle
+     * @param int $gameId
+     * @param string $gameMode
+     * @param string $platform
+     * @param string $dateBegin
+     * @param string $dateEnd
+     * @param string $hourBegin
+     * @param string $hourEnd
+     * @param int $slots
+     * @param string $dateInscriptionBegin
+     * @param string $hourInscriptionBegin
+     * @param string $dateInscriptionEnd
+     * @param string $hourInscriptionEnd
+     */
+    public static function updateEvent(
+        int $eventId,
+        string $eventTitle,
+        string $platform,
+        int $gameId,
+        string $gameMode,
+        string $dateBegin,
+        string $hourBegin,
+        string $dateEnd,
+        string $hourEnd,
+        string $dateInscriptionBegin,
+        string $hourInscriptionBegin,
+        string $dateInscriptionEnd,
+        string $hourInscriptionEnd,
+        int $slots,
+        ?int $eventRequirementId
+    ) {
+            
+            // Establezco conexión con la base de datos
+            $db = Connection::getConnection();
+    
+            if ($eventRequirementId == null) {
+                $eventRequirementId = "NULL";
+            }
+    
+            // Actualizamos el evento en la base de datos
+            $db->query("UPDATE event SET 
+                eventTitle = '$eventTitle', 
+                gameId = $gameId, 
+                gameMode = '$gameMode', 
+                platform = '$platform', 
+                dateBegin = '$dateBegin', 
+                dateEnd = '$dateEnd', 
+                hourBegin = '$hourBegin', 
+                hourEnd = '$hourEnd', 
+                eventRequirementId = $eventRequirementId, 
+                slots = $slots, 
+                dateInscriptionBegin = '$dateInscriptionBegin', 
+                dateInscriptionEnd = '$dateInscriptionEnd', 
+                hourInscriptionBegin = '$hourInscriptionBegin', 
+                hourInscriptionEnd = '$hourInscriptionEnd' 
+                WHERE eventId = $eventId;");
+        }
+
+
+    /**
+     * Devuelve los eventos creados por un usuario
+     * @param int $userId
+     * @return array
+     */
+    public static function getEventsByOwnerId(int $userId): array {
+
+        // Establezco conexión con la base de datos
+        $db = Connection::getConnection();
+
+        // Consulta a la base de datos, cogemos todos los eventos que coinciden con el ID pedido
+        $db->query("SELECT * FROM event WHERE eventOwnerId = $userId;");
+        $events = $db->getAll("Event"); //Devuelve un objeto event
+
+        //Devolvemos los eventos
+        return $events;
+        
+    }
+
+    /**
+     * Elimina un evento
+     * @param int $eventId
+     */
+    public static function deleteEventById(int $eventId) {
+
+        // Establezco conexión con la base de datos
+        $db = Connection::getConnection();
+
+        // Eliminamos el evento de la base de datos
+        $db->query("DELETE FROM event WHERE eventId = $eventId;");
+    }
+
+    /**
+     * Devuelve un evento por su Id
+     * @param int $eventId
+     * @return event
+     */
+    public static function getEventById(int $eventId): event {
+
+        // Establezco conexión con la base de datos
+        $db = Connection::getConnection();
+
+        // Consulta a la base de datos, cogemos el evento que coinciden con el ID pedido
+        $db->query("SELECT * FROM event WHERE eventId = $eventId;");
+        $event = $db->getRow("Event"); //Devuelve un objeto event
+
+        //Devolvemos el evento
+        return $event;
     }
 }

@@ -1,71 +1,84 @@
 <?php
 
-require_once $_SESSION['rootPath']."/library/extra_functs.php";
-    require_once $_SESSION['rootPath']."/models/event.php";
-    require_once $_SESSION['rootPath']."/models/user.php";
-    require_once $_SESSION['rootPath']."/models/stat.php";
-    require_once $_SESSION['rootPath']."/models/game.php";
-    require_once $_SESSION['rootPath']."/controllers/mainController.php";
-    require_once $_SESSION['rootPath']."/controllers/controller.php";
-    require_once $_SESSION['rootPath']."/controllers/gameController.php";
+require_once $_SESSION['rootPath'] . "/library/extra_functs.php";
+require_once $_SESSION['rootPath'] . "/models/event.php";
+require_once $_SESSION['rootPath'] . "/models/user.php";
+require_once $_SESSION['rootPath'] . "/models/stat.php";
+require_once $_SESSION['rootPath'] . "/models/game.php";
+require_once $_SESSION['rootPath'] . "/controllers/mainController.php";
+require_once $_SESSION['rootPath'] . "/controllers/controller.php";
+require_once $_SESSION['rootPath'] . "/controllers/gameController.php";
 
-    class EventController extends Controller {
+class EventController extends Controller
+{
 
-        /**
-         * Esta función guarda en la sessión los participantes de un evento
-         * @param Event $event
-         */
-        public static function getEventsParticipants($userId): array {
-            
-            $events = Event::getAllEventsByFollowedUsers($userId); // Cogemos todos los eventos de los usuarios seguidos por el usuario logeado
+    /**
+     * Esta función guarda en la sessión los participantes de un evento
+     * @param Event $event
+     */
+    public static function getEventsParticipants($userId): array
+    {
 
-            $eventParticipants = [];
+        $events = Event::getAllEventsByFollowedUsers($userId); // Cogemos todos los eventos de los usuarios seguidos por el usuario logeado
 
-            foreach ($events as $event) {
+        $eventParticipants = [];
 
-                if ($event->participants == null) {
-                    $participantsArray = [];
-                } else {
-                    $participantsArray = explode(",", $event->participants);
-                }
+        foreach ($events as $event) {
 
-                array_push($eventParticipants, $participantsArray);
+            if ($event->participants == null) {
+                $participantsArray = [];
+            } else {
+                $participantsArray = explode(",", $event->participants);
             }
-                
-            return $eventParticipants;
-        } 
 
-        /**
-         * Esta función va a mostrar el formulario de cración de eventos
-         */
-        public function showCreateEvent() {
-
-            $baseTemplateData = mainController::prepareBaseTemplateData();
-
-            $this->render("main/createEvent.twig", ["baseTemplateData" => $baseTemplateData]);
+            array_push($eventParticipants, $participantsArray);
         }
+
+        return $eventParticipants;
+    }
+
+    /**
+     * Esta función va a mostrar el formulario de creación de eventos
+     */
+    public function showCreateEvent()
+    {
+
+        $baseTemplateData = mainController::prepareBaseTemplateData();
+        $errCode = $_GET["errCode"] ?? null;
+
+        $this->render("main/createEvent.twig", ["baseTemplateData" => $baseTemplateData, "errCode" => $errCode]);
+    }
+
+    /**
+     * Muestra el formulario para editar el evento
+     * @return
+     */
+    public function showEditEvent()
+    {
+        $baseTemplateData = mainController::prepareBaseTemplateData();
+        $event = Event::getEventById($_GET["eventId"]);
+        $eventRequirement = eventRequirement::getEventRequirementById($event->eventRequirementId);
+        $game = game::getGameById($event->gameId);
+
+        $errCode = $_GET["errCode"] ?? null;
+
+        $this->render("main/editEvent.twig", ["baseTemplateData" => $baseTemplateData, "event" => $event, "eventRequirement" => $eventRequirement, "game" => $game, "errCode" => $errCode]);
+    }
 
     /**
      * Prepara toda la información de los eventos
      * @return array
      */
-    public static function prepareEventsData():array {
+    public static function prepareEventsData(): array
+    {
 
         $loggedInUser = unserialize($_SESSION["user"]);
 
         $events = Event::getAllEventsByFollowedUsers($loggedInUser->userId); // Cogemos todos los eventos de los usuarios seguidos por el usuario logeado
         $eventsParticipants = EventController::getEventsParticipants($loggedInUser->userId); // Cogemos todos los participantes de los eventos de los usuarios seguidos por el usuario logeado
 
-
         //Antes de enviar events formateo la hora y la fecha
-        foreach ($events as $event) {
-            $event->dateBegin = $event->formatDate($event->dateBegin);
-            $event->dateEnd = $event->formatDate($event->dateEnd);
-            $event->hourBegin = $event->formatHour($event->hourBegin);
-            $event->hourEnd = $event->formatHour($event->hourEnd);
-            $event->dateInscriptionEnd = $event->formatDate($event->dateInscriptionEnd);
-            $event->hourInscriptionEnd = $event->formatHour($event->hourInscriptionEnd);
-        }
+        formatEventsDateTime($events);
 
         //Cojo todos los eventRequirement de los eventos
         $eventsRequirements = [];
@@ -74,7 +87,7 @@ require_once $_SESSION['rootPath']."/library/extra_functs.php";
                 array_push($eventsRequirements, eventRequirement::getEventRequirementById($event->eventRequirementId));
             }
         }
-    
+
         $eventsData = [
             "events" => $events,
             "eventsParticipants" => $eventsParticipants,
@@ -88,57 +101,179 @@ require_once $_SESSION['rootPath']."/library/extra_functs.php";
      * Registra un evento en la base de datos
      * @return
      */
-    public function createNewEvent(){
-
-        //Compruebo que los campos requeridos no estén vacíos
-        if (empty($_POST["eventTitle"]) || empty($_POST["eventPlatform"]) || empty($_POST["eventGame"]) || empty($_POST["eventGameMode"]) || empty($_POST["dateBegin"]) || empty($_POST["hourBegin"]) || empty($_POST["dateEnd"]) || empty($_POST["hourEnd"]) || empty($_POST["inscriptionDateBegin"]) || empty($_POST["inscriptionHourBegin"]) || empty($_POST["slots"]) || empty($_POST["inscriptionDateEnd"]) || empty($_POST["inscriptionHourEnd"])) {
-            redireccion("createEvent?errCode=voidInput"); // Redirijo a la página de creación de evento con mensaje de error
-        }
+    public function createNewEvent()
+    {
 
         //Compruebo que la fecha de inicio no sea mayor que la fecha de fin (evento)
         if ($_POST["dateBegin"] > $_POST["dateEnd"]) {
-            redireccion("createEvent?errCode=wrongeventDate"); // Redirijo a la página de creación de evento con mensaje de error
+            redireccion("newEvent?errCode=wrongeventDate"); // Redirijo a la página de creación de evento con mensaje de error
         }
 
         //Compruebo que la fecha de inicio no sea mayor que la fecha de fin (inscripcion)
         if ($_POST["inscriptionDateBegin"] > $_POST["inscriptionDateEnd"]) {
-            redireccion("createEvent?errCode=wrongInscriptionDate"); // Redirijo a la página de creación de evento con mensaje de error
+            redireccion("newEvent?errCode=wrongInscriptionDate"); // Redirijo a la página de creación de evento con mensaje de error
         }
 
         //Compruebo que las plazas no sean negativas
         if ($_POST["slots"] < 0) {
-            redireccion("createEvent?errCode=negativeSlots"); // Redirijo a la página de creación de evento con mensaje de error
+            redireccion("newEvent?errCode=negativeSlots"); // Redirijo a la página de creación de evento con mensaje de error
         }
 
         //Compruebo que el juego existe en la base de datos
         if (!gameController::checkGame($_POST["eventGame"])) {
-            redireccion("createEvent?errCode=gameNotFound"); // Redirijo a la página de creación de evento con mensaje de error
+            redireccion("newEvent?errCode=gameNotFound"); // Redirijo a la página de creación de evento con mensaje de error
         }
 
         //Si todos los campos de los requisitos están vacíos, el evento no tiene requisitos
-        if ($_POST["minLvl"]==null && $_POST["maxLvl"]==null && $_POST["minRank"]==null && $_POST["maxRank"]==null){
+        if ($_POST["minLvl"] == null && $_POST["maxLvl"] == null && $_POST["minRank"] == null && $_POST["maxRank"] == null) {
             $eventRequirementId = null;
-        }
-        //Creo los requisitos del evento
-        $eventRequirement = eventRequirement::createEventRequirement($_POST["minLvl"], $_POST["maxLvl"], $_POST["minRank"], $_POST["maxRank"]);
+        } else {
+            //Creo los requisitos del evento
+            $eventRequirement = eventRequirement::createEventRequirement($_POST["minLvl"], $_POST["maxLvl"], $_POST["minRank"], $_POST["maxRank"]);
 
-        //Cogemos el id del eventoRequirement
-        $eventRequirementId = $eventRequirement->eventRequirementId;
+            //Cogemos el id del eventoRequirement
+            $eventRequirementId = $eventRequirement->eventRequirementId;
+        }
+
+
 
         //Cogemos el id del juego
         $gameId = gameController::getGameIdByName($_POST["eventGame"]);
 
-        //TODO: Comprobar que funciona??
-        $event = event::createEvent
-        (
-                $_SESSION["user"]->userId,
-                $_POST["eventTitle"], $_POST["eventPlatform"], 
-                $gameId,  $_POST["eventGameMode"], 
-                $_POST["dateBegin"],  $_POST["hourBegin"], 
-                $_POST["dateEnd"],    $_POST["hourEnd"],
-                $_POST["inscriptionDateBegin"], $_POST["inscriptionHourBegin"], 
-                $_POST["inscriptionDateEnd"], $_POST["inscriptionHourEnd"],
-                $_POST["slots"], $eventRequirementId
+        event::createEvent(
+                unserialize($_SESSION["user"])->userId,
+                $_POST["eventTitle"],
+                $_POST["eventPlatform"],
+                $gameId,
+                $_POST["eventGameMode"],
+                $_POST["dateBegin"],
+                $_POST["hourBegin"],
+                $_POST["dateEnd"],
+                $_POST["hourEnd"],
+                $_POST["inscriptionDateBegin"],
+                $_POST["inscriptionHourBegin"],
+                $_POST["inscriptionDateEnd"],
+                $_POST["inscriptionHourEnd"],
+                $_POST["slots"],
+                $eventRequirementId
             );
+
+        redireccion("main");
     }
+
+    /**
+     * Devuelve los eventos de un usuario
+     * @return array
+     */
+    public static function getUserEvents($userId): array
+    {
+        $events = Event::getAllEventsByUserId($userId); // Cogemos todos los eventos de los usuarios seguidos por el usuario logeado
+
+        //Antes de enviar events formateo la hora y la fecha
+        formatEventsDateTime($events);
+
+        //Cojo todos los eventRequirement de los eventos
+        $eventsRequirements = [];
+        foreach ($events as $event) {
+            if ($event->eventRequirementId != null) {
+                array_push($eventsRequirements, eventRequirement::getEventRequirementById($event->eventRequirementId));
+            }
+        }
+
+        $eventsData = [
+            "events" => $events,
+            "eventsRequirements" => $eventsRequirements,
+        ];
+
+        return $eventsData;
+    }
+
+    /**
+     * Devuelve todos los eventos creados por un usuario
+     * @return array
+     */
+    public static function getAllEventsByOwnerId(int $userId): array
+    {
+
+        $events = Event::getEventsByOwnerId($userId); // Cogemos todos los eventos creados por el usuario
+
+        formatEventsDateTime($events);
+
+        return $events;
+    }
+
+    /**
+     * Elimina un evento por su Id
+     * @return
+     */
+    public function deleteEvent()
+    {
+        Event::deleteEventById($_GET["eventId"]);
+        redireccion($_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * Edita un evento
+     * @return
+     */
+    public function editEvent()
+    {
+            
+            //Compruebo que la fecha de inicio no sea mayor que la fecha de fin (evento)
+            if ($_POST["dateBegin"] > $_POST["dateEnd"]) {
+                redireccion("editEvent?eventId=" . $_POST["eventId"] . "&errCode=wrongeventDate"); // Redirijo a la página de creación de evento con mensaje de error
+            }
+    
+            //Compruebo que la fecha de inicio no sea mayor que la fecha de fin (inscripcion)
+            if ($_POST["inscriptionDateBegin"] > $_POST["inscriptionDateEnd"]) {
+                redireccion("editEvent?eventId=" . $_POST["eventId"] . "&errCode=wrongInscriptionDate"); // Redirijo a la página de creación de evento con mensaje de error
+            }
+    
+            //Compruebo que las plazas no sean negativas
+            if ($_POST["slots"] < 0) {
+                redireccion("editEvent?eventId=" . $_POST["eventId"] . "&errCode=negativeSlots"); // Redirijo a la página de creación de evento con mensaje de error
+            }
+    
+            //Compruebo que el juego existe en la base de datos
+            if (!gameController::checkGame($_POST["eventGame"])) {
+                redireccion("editEvent?eventId=" . $_POST["eventId"] . "&errCode=gameNotFound"); // Redirijo a la página de creación de evento con mensaje de error
+            }
+    
+            //Si todos los campos de los requisitos están vacíos, el evento no tiene requisitos
+            if ($_POST["minLvl"] == null && $_POST["maxLvl"] == null && $_POST["minRank"] == null && $_POST["maxRank"] == null) {
+                $eventRequirementId = null;
+            } else {
+                //Creo los requisitos del evento
+                $eventRequirement = eventRequirement::createEventRequirement($_POST["minLvl"], $_POST["maxLvl"], $_POST["minRank"], $_POST["maxRank"]);
+    
+                //Cogemos el id del eventoRequirement
+                $eventRequirementId = $eventRequirement->eventRequirementId;
+            }
+    
+            //Cogemos el id del juego
+            $gameId = intval(gameController::getGameIdByName($_POST["eventGame"]));
+
+            $eventId = intval($_POST["eventId"]);
+    
+            event::updateEvent(
+                $eventId,
+                $_POST["eventTitle"],
+                $_POST["eventPlatform"],
+                $gameId,
+                $_POST["eventGameMode"],
+                $_POST["dateBegin"],
+                $_POST["hourBegin"],
+                $_POST["dateEnd"],
+                $_POST["hourEnd"],
+                $_POST["inscriptionDateBegin"],
+                $_POST["inscriptionHourBegin"],
+                $_POST["inscriptionDateEnd"],
+                $_POST["inscriptionHourEnd"],
+                $_POST["slots"],
+                $eventRequirementId
+            );
+
+            redireccion("/userProfile/" . unserialize($_SESSION["user"])->userId);
+    }
+
 }

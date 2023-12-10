@@ -4,6 +4,7 @@
 body {
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .SingIn {
@@ -106,13 +107,13 @@ body {
 }
 
 .PassInput {
-    width: 440px; 
-    height: 42px; 
-    left: 0px; 
-    top: 36px; 
-    position: absolute; 
-    background: white; 
-    border-radius: 5px; 
+    width: 440px;
+    height: 42px;
+    left: 0px;
+    top: 36px;
+    position: absolute;
+    background: white;
+    border-radius: 5px;
     border: 1px rgba(0, 0, 0, 0.46) solid;
     padding-left: 10px;
     font-family: 'Raleway', 'sans-serif';
@@ -129,13 +130,13 @@ body {
 }
 
 .EmailInput {
-    width: 440px; 
-    height: 42px; 
-    left: 0px; 
-    top: 36px; 
-    position: absolute; 
-    background: white; 
-    border-radius: 5px; 
+    width: 440px;
+    height: 42px;
+    left: 0px;
+    top: 36px;
+    position: absolute;
+    background: white;
+    border-radius: 5px;
     border: 1px rgba(0, 0, 0, 0.46) solid;
     padding-left: 10px;
     font-family: 'Raleway', 'sans-serif';
@@ -260,7 +261,7 @@ body {
     position: absolute;
 }
 
-.Logo{
+.Logo {
     width: 70px;
     height: 70px;
     left: 0px;
@@ -286,7 +287,7 @@ body {
     position: absolute;
 }
 
-.RightComposition img{
+.RightComposition img {
     width: 1000px;
     height: auto;
 
@@ -302,13 +303,17 @@ body {
     left: 205px;
     top: 300px;
     position: absolute;
-    background-color: whitesmoke;
     border-radius: 15px;
     border: 2px solid #EC2828;
 
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.6px);
+    -webkit-backdrop-filter: blur(10.6px);
+
 }
 
-.errCard--img img{
+.errCard--img img {
     width: 75px;
     height: 75px;
 }
@@ -321,7 +326,7 @@ body {
     margin-bottom: 10px;
 }
 
-.errCard--tryAgainBtn{
+.errCard--tryAgainBtn {
     width: 160px;
     height: 40px;
     background-color: #EC2828;
@@ -338,7 +343,7 @@ body {
     margin-top: 10px;
 }
 
-.errCard--tryAgainBtn a{
+.errCard--tryAgainBtn a {
     color: white;
     text-decoration: none;
 }

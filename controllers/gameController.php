@@ -1,6 +1,7 @@
 <?php
 
     require_once $_SESSION['rootPath']."/models/game.php";
+    require_once $_SESSION['rootPath']."/controllers/controller.php";
 
     class gameController extends controller {
 
@@ -26,4 +27,18 @@
             $gameId = Game::getGameIdByName($gameName);
             return $gameId;
         }
+
+        /**
+         * Busca un juego por su nombre y los muestra en una lista
+         * @param string $gameName
+         * @return string
+         */
+        public static function getGamesName() {
+            $games = Game::getGamesNameByName($_GET["gameNameInput"]);
+
+            foreach ($games as $game) {
+                echo "<option value='" . $game->gameName . "'>" . $game->gameName . "</option>";
+            }
+        }
+
     }
