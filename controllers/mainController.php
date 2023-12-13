@@ -11,6 +11,8 @@ require_once $_SESSION['rootPath'] . "/models/user_join_event.php";
 
 require_once $_SESSION['rootPath'] . "/controllers/controller.php";
 require_once $_SESSION['rootPath'] . "/controllers/eventController.php";
+require_once $_SESSION['rootPath'] . "/controllers/controller.php";
+require_once $_SESSION['rootPath'] . "/controllers/eventController.php";
 
 
 class mainController extends Controller
@@ -23,6 +25,26 @@ class mainController extends Controller
   public static function prepareBaseTemplateData(): array
   {
 
+    // Cogemos el usuario logeado
+    $loggedInUser = unserialize($_SESSION["user"]);
+
+    $users = User::getAllUsers(); // Cogemos todos los usuarios como array
+    $followedUsers = User::getAllFollowedUsers($loggedInUser->userId); // Cogemos todos los usuarios seguidos como array
+    $userGameStats = Stat::getStatsByUserId($loggedInUser->userId); // Cogemos las estadisticas del usuario logeado
+    $games = Game::getAllGames(); // Cogemos todos los juegos como array    
+
+    // inicializamos el array
+    $baseTemplateData = array();
+
+    // Añadimos los datos al array
+    $baseTemplateData =
+      [
+        "users" => $users,
+        "followedUsers" => $followedUsers,
+        "logedUser" => $loggedInUser,
+        "userGameStats" => $userGameStats,
+        "games" => $games
+      ];
     // Cogemos el usuario logeado
     $loggedInUser = unserialize($_SESSION["user"]);
 

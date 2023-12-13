@@ -1,6 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
 -- Servidor: db
 -- Tiempo de generación: 06-12-2023 a las 10:46:54
@@ -15,20 +13,31 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
 
 --
--- Base de datos: `MeetoPlayDB`
+-- GTID state at the beginning of the backup 
 --
 
--- --------------------------------------------------------
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '';
 
 --
--- Estructura de tabla para la tabla `event`
+-- Table structure for table `event`
 --
 
+DROP TABLE IF EXISTS `event`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event` (
-  `eventId` int NOT NULL,
+  `eventId` int NOT NULL AUTO_INCREMENT,
   `eventTitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `gameId` int NOT NULL,
   `gameMode` varchar(255) NOT NULL,
@@ -60,110 +69,137 @@ INSERT INTO `event` (`eventId`, `eventTitle`, `gameId`, `gameMode`, `platform`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `eventRequirement`
+-- Table structure for table `eventRequirement`
 --
 
+DROP TABLE IF EXISTS `eventRequirement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `eventRequirement` (
-  `eventRequirementId` int NOT NULL,
+  `eventRequirementId` int NOT NULL AUTO_INCREMENT,
   `maxRank` varchar(50) DEFAULT NULL,
   `minRank` varchar(50) DEFAULT NULL,
   `maxLvl` int DEFAULT NULL,
-  `minLvl` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `minLvl` int DEFAULT NULL,
+  PRIMARY KEY (`eventRequirementId`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `eventRequirement`
+-- Dumping data for table `eventRequirement`
 --
 
-INSERT INTO `eventRequirement` (`eventRequirementId`, `maxRank`, `minRank`, `maxLvl`, `minLvl`) VALUES
-(1, 'Oro II', 'Madera IV', 500, 30),
-(2, 'Platino III', 'Oro I', NULL, NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `eventRequirement` WRITE;
+/*!40000 ALTER TABLE `eventRequirement` DISABLE KEYS */;
+INSERT INTO `eventRequirement` VALUES (0,'1','100',1,12),(1,'Oro II','Madera IV',500,30),(2,'Platino III','Oro I',NULL,NULL);
+/*!40000 ALTER TABLE `eventRequirement` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `follower_followed`
+-- Table structure for table `follower_followed`
 --
 
+DROP TABLE IF EXISTS `follower_followed`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `follower_followed` (
   `followedId` int NOT NULL,
-  `followerId` int NOT NULL
+  `followerId` int NOT NULL,
+  PRIMARY KEY (`followedId`,`followerId`),
+  KEY `fk_followerId_userId` (`followerId`),
+  CONSTRAINT `fk_followedId_userId` FOREIGN KEY (`followedId`) REFERENCES `user` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_followerId_userId` FOREIGN KEY (`followerId`) REFERENCES `user` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `follower_followed`
+-- Dumping data for table `follower_followed`
 --
 
-INSERT INTO `follower_followed` (`followedId`, `followerId`) VALUES
-(11, 12),
-(13, 12);
-
--- --------------------------------------------------------
+LOCK TABLES `follower_followed` WRITE;
+/*!40000 ALTER TABLE `follower_followed` DISABLE KEYS */;
+INSERT INTO `follower_followed` VALUES (12,1),(12,2),(12,3),(12,4),(12,5),(12,6),(12,7),(12,8),(12,11),(1,12),(2,12),(3,12),(6,12),(11,12),(13,12),(11,13),(12,13);
+/*!40000 ALTER TABLE `follower_followed` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `game`
+-- Table structure for table `game`
 --
 
+DROP TABLE IF EXISTS `game`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `game` (
-  `gameId` int NOT NULL,
+  `gameId` int NOT NULL AUTO_INCREMENT,
   `gameName` varchar(150) NOT NULL,
-  `gameLogo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `gameLogo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`gameId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `game`
+-- Dumping data for table `game`
 --
 
-INSERT INTO `game` (`gameId`, `gameName`, `gameLogo`) VALUES
-(1, 'League of Legends', 'img/gameLogos/lolLogo.png'),
-(2, 'Valorant', 'img/gameLogos/valorantLogo.png'),
-(3, 'Counter Strike', 'img/gameLogos/csgoLogo.png'),
-(4, 'Minecraft', 'img/gameLogos/minecraftLogo.png');
-
--- --------------------------------------------------------
+LOCK TABLES `game` WRITE;
+/*!40000 ALTER TABLE `game` DISABLE KEYS */;
+INSERT INTO `game` VALUES (1,'League of Legends','img/gameLogos/lolLogo.png'),(2,'Valorant','img/gameLogos/valorantLogo.png'),(3,'Counter Strike','img/gameLogos/csgoLogo.png'),(4,'Minecraft','img/gameLogos/minecraftLogo.png');
+/*!40000 ALTER TABLE `game` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `stat`
+-- Table structure for table `stat`
 --
 
+DROP TABLE IF EXISTS `stat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `stat` (
-  `statId` int NOT NULL,
+  `statId` int NOT NULL AUTO_INCREMENT,
   `gameId` int NOT NULL,
   `level` int NOT NULL,
   `maxRank` varchar(100) DEFAULT NULL,
   `timePlayed` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `favGameMode` varchar(255) NOT NULL,
   `inGameName` varchar(255) NOT NULL,
-  `userId` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Volcado de datos para la tabla `stat`
---
-
-INSERT INTO `stat` (`statId`, `gameId`, `level`, `maxRank`, `timePlayed`, `favGameMode`, `inGameName`, `userId`) VALUES
-(1, 1, 376, 'Diamante II (TFT)', '1596:20', 'Aram', 'Vakerit0', 12),
-(2, 2, 183, 'Diamante IV', '693:45', 'Clasificatoria', 'Vakerit0#EUW', 12),
-(3, 3, 216, 'Silver III', '123:12', 'Death Match', 'Vakero2000', 12);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `user`
---
-
-CREATE TABLE `user` (
   `userId` int NOT NULL,
+  PRIMARY KEY (`statId`),
+  KEY `gameId` (`gameId`),
+  CONSTRAINT `stat_ibfk_1` FOREIGN KEY (`gameId`) REFERENCES `game` (`gameId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stat`
+--
+
+LOCK TABLES `stat` WRITE;
+/*!40000 ALTER TABLE `stat` DISABLE KEYS */;
+INSERT INTO `stat` VALUES (1,1,376,'Diamante II (TFT)','1596:20','Aram','Vakerit0',12),(2,2,183,'Diamante IV','693:45','Clasificatoria','Vakerit0#EUW',12),(3,3,216,'Silver III','123:12','Death Match','Vakero2000',12);
+/*!40000 ALTER TABLE `stat` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `userId` int NOT NULL AUTO_INCREMENT,
   `userName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `profilePic` varchar(255) DEFAULT NULL,
   `userStatus` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `bornDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `bornDate` date NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`userId`, `userName`, `profilePic`, `userStatus`, `email`, `password`, `bornDate`) VALUES
@@ -187,24 +223,22 @@ INSERT INTO `user` (`userId`, `userName`, `profilePic`, `userStatus`, `email`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user_join_event`
+-- Table structure for table `user_join_event`
 --
 
+DROP TABLE IF EXISTS `user_join_event`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_join_event` (
   `userId` int NOT NULL,
-  `eventId` int NOT NULL
+  `eventId` int NOT NULL,
+  PRIMARY KEY (`userId`,`eventId`),
+  UNIQUE KEY `userId` (`userId`,`eventId`) USING BTREE,
+  KEY `eventId` (`eventId`),
+  CONSTRAINT `user_join_event_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `user_join_event_ibfk_2` FOREIGN KEY (`eventId`) REFERENCES `event` (`eventId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Volcado de datos para la tabla `user_join_event`
---
-
-INSERT INTO `user_join_event` (`userId`, `eventId`) VALUES
-(13, 1),
-(11, 2),
-(12, 2),
-(13, 2),
-(12, 3);
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Índices para tablas volcadas
@@ -323,3 +357,6 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-12-10 22:54:05
