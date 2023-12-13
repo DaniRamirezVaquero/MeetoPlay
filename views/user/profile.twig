@@ -1,0 +1,69 @@
+{% extends "baseTemplate.twig" %}
+
+{% block mainContent %}
+<div class="profileMainCard--bg">
+  <div class="profileMainCard--gridcontainer">
+    <div class="profileMainCard--userdata">
+      <div class="profileMainCard--userdata--profilepicborder">
+        <div class="profileMainCard--userdata--profilepic--container">
+          <img src="../{{ user.profilePic }}" alt="userProfilePic" class="profileMainCard--userdata--profilepic">
+        </div>
+      </div>
+      <div class="profileMainCard--userdata--username"> {{ user.userName }} </div>
+    </div>
+    <div class="profileMainCard--userRealtions">
+      <div class="profileMainCard--userRealtions--col Friends">
+        <div class="profileMainCard--userRealtions--Friends--count count">{{ userRelations.friendsCount }}</div>
+        <div class="profileMainCard--userRealtions--Friends--title">Amigos</div>
+      </div>
+      <div class="profileMainCard--userRealtions--col Followed">
+        <div class="profileMainCard--userRealtions--Followed--count count">{{  userRelations.followedCount }}</div>
+        <div class="profileMainCard--userRealtions--Followed--title">Seguidos</div>
+      </div>
+      <div class="profileMainCard--userRealtions--col Followers">
+        <div class="profileMainCard--userRealtions--Followers--count count">{{  userRelations.followersCount }}</div>
+        <div class="profileMainCard--userRealtions--Followers--title">Seguidores</div>
+      </div>
+    </div>
+    <div class="profileMainCard--backBtn"><a href="/main"><img src="../views/img/backArrow.png" alt="backArrow"></a></div>
+    <div class="profileMainCard--userBio">Nuevo usuario! 🕹️</div>
+    <div class="profileMainCard--userEvents-title">Eventos</div>
+    <div class="profileMainCard--userSocials--container">
+      <div class="profileMainCard--userSocials steam"><img src="../views/img/steam_socialLogo.png" alt="socialLogo"></div>
+      <div class="profileMainCard--userSocials discord"><img src="../views/img/discord_socialLogo.png" alt="socialLogo"></div>
+      <div class="profileMainCard--userSocials instragram"><img src="../views/img/instagram_socialLogo.png" alt="socialLogo"></div>
+    </div>
+    <div class="profileMainCard--userEvents">
+      <div class="profileMainCard-userEvents--scrollcontainer">
+        {% for event in userEvents %}
+          <div class="profileMainCard-userEvents--event">
+            <div class="profileMainCard-userEvents--event--gameLogo"><img src="../{{ baseTemplateData.games[event.gameId-1].gameLogo }}" alt="gameLogo"></div>
+            <div class="col1">
+              <div class="profileMainCard-userEvents--event--eventTitle">{{ event.eventTitle }}</div>
+              <div class="profileMainCard-userEvents--event--gameName">{{ baseTemplateData.games[event.gameId-1].gameName}}</div>
+            </div>
+            <div class="col2">
+              <div class="profileMainCard-userEvents--event--eventDateTime">
+                Fecha y hora: 
+                <div class="profileMainCard-userEvents--event--eventDateTime--content">{{ event.dateBegin }} a las {{ event.hourBegin }}</div>
+              </div>
+            </div>
+            <div class="col3">
+              <div class="profileMainCard-userEvents--event--eventDateTimeEnd">
+                Fecha y hora: 
+                <div class="profileMainCard-userEvents--event--eventDateTimeEnd--content">{{ event.dateEnd }} a las {{ event.hourEnd }}</div>
+              </div>
+            </div>
+            <div class="col4">
+              <div class="profileMainCard-userEvents--event--btns">
+                <div class="profileMainCard-userEvents--event--btns--edit"><a href="/editEvent/{{ event.eventId }}"><img src="../views/img/Edit.png" alt="editIcon"></a></div>
+                <div class="profileMainCard-userEvents--event--btns--delete"><a href="/deleteEvent/{{ event.eventId }}"><img src="../views/img/Trash.png" alt="deleteIcon"></a></div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

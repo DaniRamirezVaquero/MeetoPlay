@@ -186,7 +186,7 @@
     top: 300px;
     position: absolute;
     border-radius: 15px;
-    border: 2px solid #f03a3a;
+    border: 2px solid #EC2828;
 
     background: rgba(255, 255, 255, 0.5);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -241,6 +241,10 @@
     font-size: 16px;
     margin-bottom: 10px;
 }
+
+/* #eventGame {
+    width: 215px;
+} */
 
 .newEvent--from--inputs--eventGame--select {
     width: 100%;

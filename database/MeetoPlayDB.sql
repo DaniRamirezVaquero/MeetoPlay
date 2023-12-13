@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 26-11-2023 a las 20:51:27
--- Versión del servidor: 8.1.0
+-- Tiempo de generación: 06-12-2023 a las 10:46:54
+-- Versión del servidor: 8.2.0
 -- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -41,7 +41,9 @@ CREATE TABLE `event` (
   `eventRequirementId` int DEFAULT NULL,
   `participants` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `slots` int NOT NULL,
+  `dateInscriptionBegin` date DEFAULT NULL,
   `dateInscriptionEnd` date NOT NULL,
+  `hourInscriptionBegin` time DEFAULT NULL,
   `hourInscriptionEnd` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -49,11 +51,11 @@ CREATE TABLE `event` (
 -- Volcado de datos para la tabla `event`
 --
 
-INSERT INTO `event` (`eventId`, `eventTitle`, `gameId`, `gameMode`, `platform`, `eventOwnerId`, `dateBegin`, `dateEnd`, `hourBegin`, `hourEnd`, `eventRequirementId`, `participants`, `slots`, `dateInscriptionEnd`, `hourInscriptionEnd`) VALUES
-(1, 'Tardecita de Lol', 1, 'Aram', 'PC', 11, '2023-12-17', '2023-12-17', '17:00:00', '23:00:00', 1, 'Natty,Chriss', 5, '2023-12-17', '15:00:00'),
-(2, 'Minecraft Server', 4, 'Moded', 'PC / XBox', 11, '2023-12-11', '2023-12-18', '19:30:00', '24:00:00', NULL, 'Vaker0,!TT7,SerialBan,Natty,Chriss,Pepelu,Joselito67,Rtt62,KillezMAzter,GiveupPaper,NoobPepito,XSunrise,GhostSkill,FreedomShoot,JackpotS,Aeroyep,orundG3,KekPlaie', 20, '2023-12-11', '19:00:00'),
-(3, 'Duo Valorant', 2, 'Ranked', 'PC', 13, '2023-12-01', '2023-12-01', '17:00:00', '19:30:00', 2, 'Vaker0', 1, '2023-12-01', '19:30:00'),
-(4, 'Torneo CSgo', 3, 'Competitivo', 'PC', 12, '2023-12-13', '2023-12-15', '16:30:00', '21:00:00', NULL, 'KillerZXN,Turkito,AroonP8', 50, '2023-12-13', '16:30:00');
+INSERT INTO `event` (`eventId`, `eventTitle`, `gameId`, `gameMode`, `platform`, `eventOwnerId`, `dateBegin`, `dateEnd`, `hourBegin`, `hourEnd`, `eventRequirementId`, `participants`, `slots`, `dateInscriptionBegin`, `dateInscriptionEnd`, `hourInscriptionBegin`, `hourInscriptionEnd`) VALUES
+(1, 'Tardecita de Lol', 1, 'Aram', 'PC', 11, '2023-12-17', '2023-12-17', '17:00:00', '23:00:00', 1, 'Natty,Chriss', 5, '2023-12-01', '2023-12-17', '16:08:41', '15:00:00'),
+(2, 'Minecraft Server', 4, 'Moded', 'PC / XBox', 11, '2023-12-11', '2023-12-18', '19:30:00', '24:00:00', NULL, 'Vaker0,!TT7,SerialBan,Natty,Chriss,Pepelu,Joselito67,Rtt62,KillezMAzter,GiveupPaper,NoobPepito,XSunrise,GhostSkill,FreedomShoot,JackpotS,Aeroyep,orundG3,KekPlaie', 20, '2023-12-01', '2023-12-11', '11:08:41', '19:00:00'),
+(3, 'Duo Valorant', 2, 'Ranked', 'PC', 13, '2023-12-01', '2023-12-01', '17:00:00', '19:30:00', 2, 'Vaker0', 1, '2023-12-01', '2023-12-01', '15:08:41', '19:30:00'),
+(4, 'Torneo CSgo', 3, 'Competitivo', 'PC', 12, '2023-12-13', '2023-12-15', '16:30:00', '21:00:00', NULL, 'KillerZXN,Turkito,AroonP8', 50, '2023-12-01', '2023-12-13', '15:08:41', '16:30:00');
 
 -- --------------------------------------------------------
 
@@ -178,7 +180,9 @@ INSERT INTO `user` (`userId`, `userName`, `profilePic`, `userStatus`, `email`, `
 (11, 'Seryix', 'img/profilePics/seryixProfilePic.jpg', 'DND', 'prueba@prueba.es', 'c893bad68927b457dbed39460e6afd62', '2000-01-01'),
 (12, 'Vaker0', 'img/profilePics/vakeroProfilePic.jpg', 'Active', 'dani.vakero.1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '2000-02-08'),
 (13, 'Natty', 'img/profilePics/nattyProfilePic.jpg', 'AFK', 'natty@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '1998-09-10'),
-(15, 'nuevoRegistro', 'img/profilePics/defaultProfilePic.jpg', 'Active', 'nuevo@registro.com', '81dc9bdb52d04dc20036dbd8313ed055', '2023-11-01');
+(14, 'nuevoRegistro', 'img/profilePics/defaultProfilePic.jpg', 'Active', 'nuevo@registro.com', '81dc9bdb52d04dc20036dbd8313ed055', '2023-11-01'),
+(16, 'makinonBikes', 'img/profilePics/defaultProfilePic.jpg', 'Active', 'alberto@moreno', '202cb962ac59075b964b07152d234b70', '1978-01-01'),
+(17, 'titoJuliets', '/var/www/html/MeetoPlay/img/profilePics/defaultProfilePic.jpg', 'Active', 'tito@juliets.es', '81dc9bdb52d04dc20036dbd8313ed055', '2004-05-23');
 
 -- --------------------------------------------------------
 
@@ -263,7 +267,7 @@ ALTER TABLE `user_join_event`
 -- AUTO_INCREMENT de la tabla `event`
 --
 ALTER TABLE `event`
-  MODIFY `eventId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `eventId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `game`
@@ -281,7 +285,7 @@ ALTER TABLE `stat`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `userId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `userId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restricciones para tablas volcadas
